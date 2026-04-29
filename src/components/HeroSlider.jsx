@@ -27,7 +27,7 @@ export default function HeroSlider() {
           speed={1000}
           autoplay={{ delay: 6000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
-          className="w-full h-auto rounded-3xl overflow-hidden shadow-2xl bg-[#E8E4D8]"
+          className="w-full h-auto rounded-2xl overflow-hidden shadow-2xl bg-[#E8E4D8]"
         >
           {bannerImages.map((imagePath, index) => (
             <SwiperSlide key={index} className="w-full h-auto">

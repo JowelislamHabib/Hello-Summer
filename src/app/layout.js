@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import HeroSlider from "@/components/HeroSlider";
 import PopularProducts from "@/components/PopularProducts";
+import Tips from "@/components/Tips";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         <NavBar />
         <HeroSlider />
         <PopularProducts />
+        <Tips />
         <main>{children}</main>
         <Footer />
       </body>
