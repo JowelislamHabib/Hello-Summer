@@ -39,7 +39,7 @@ const Tips = () => {
     },
   ];
   return (
-    <section className="bg-50/30 py-20 px-4">
+    <section className="bg-orange-50/40 py-20 px-4">
       <div className="container mx-auto">
         <div className="mb-12 border-l-8 border-[#1C1007] pl-6">
           <h2 className="md:text-5xl text-5xl font-bold font-serif text-[#1C1007] tracking-tight">
