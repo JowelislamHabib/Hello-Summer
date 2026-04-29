@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Serif Font for high-end look */}
-        <h3 className="text-xl  font-serif text-[#1C1007] leading-tight mb-4 min-h-[3.5rem] line-clamp-2 transition-colors group-hover:text-[#FD6C17]">
+        <h3 className="text-xl antialiased font-serif text-[#1C1007] leading-tight mb-4 min-h-[3.5rem] line-clamp-2 transition-colors group-hover:text-[#FD6C17]">
           {name}
         </h3>
 
