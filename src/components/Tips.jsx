@@ -1,7 +1,83 @@
 import React from "react";
+import {
+  IoWaterOutline,
+  IoSunnyOutline,
+  IoLeafOutline,
+  IoShirtOutline,
+} from "react-icons/io5";
 
 const Tips = () => {
-  return <div></div>;
+  const tips = [
+    {
+      title: "Stay Hydrated",
+      desc: "Drink at least 8–10 glasses of water daily to keep your body cool and energized. Proper hydration helps regulate body temperature, improves digestion, and keeps your skin soft, glowing, and less prone to dryness or irritation during hot weather.",
+      icon: <IoWaterOutline size={32} />,
+      className: "md:col-span-2 bg-white",
+      accent: "text-blue-500",
+    },
+    {
+      title: "Sun Protection",
+      desc: "Please ensure you apply a broad-spectrum sunscreen with an SPF of 50 or higher prior to outdoor activities. Apply the sunscreen 15 to 20 minutes before sun exposure, and reapply every two hours, especially if you are sweating or spending extended periods outdoors. Remember to cover often overlooked areas such as your ears, neck, and hands. For added protection, consider wearing sunglasses, a hat, and lightweight, long-sleeved clothing to reduce skin exposure to direct sunlight. Limiting outdoor activities during peak hours (10 a.m. to 4 p.m.) can help minimize the risk of sunburn, premature skin aging, and long-term skin damage caused by UV rays. Staying consistent with sun protection habits can significantly improve your skin’s overall health and resilience over time. Even on cloudy days, UV rays can penetrate the skin, so daily protection is essential.",
+      icon: <IoSunnyOutline size={32} />,
+      className:
+        "md:col-start-3 md:row-start-1 md:row-span-2 bg-[#FD6C17] text-white",
+      accent: "text-white",
+    },
+    {
+      title: "Skincare Routine",
+      desc: "Switch to a lightweight, gel-based moisturizer and gentle cleanser suitable for humid conditions. Avoid heavy creams that can clog pores. Regular cleansing and moisturizing help control excess oil, prevent breakouts, and keep your skin fresh throughout the day.",
+      icon: <IoLeafOutline size={32} />,
+      className: "md:col-span-1 bg-[#1C1007] text-[#FAF8F1]",
+      accent: "text-[#FBA919]",
+    },
+    {
+      title: "Light Fabrics",
+      desc: "Choose breathable fabrics like cotton and linen that allow air circulation and absorb sweat effectively. Loose-fitting clothes help prevent heat rashes and discomfort, keeping you cool and comfortable even during the hottest summer days.",
+      icon: <IoShirtOutline size={32} />,
+      className: "md:col-span-1 bg-white",
+      accent: "text-orange-500",
+    },
+  ];
+  return (
+    <section className="bg-50/30 py-20 px-4">
+      <div className="container mx-auto">
+        <div className="mb-12 border-l-8 border-[#1C1007] pl-6">
+          <h2 className="text-4xl md:text-5xl font-serif text-[#1C1007] tracking-tight">
+            Summer <span className="text-[#FD6C17]">Care Tips</span>
+          </h2>
+          <p className="text-[#1C1007]/60 mt-2 font-medium">
+            Small habits for a better season.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows">
+          {tips.map((tip, index) => (
+            <div
+              key={index}
+              className={`group relative p-8 rounded-xl border border-[#E8E4D8] overflow-hidden flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${tip.className}`}
+            >
+              <div className="absolute top-4 right-4 w-10 h-10 bg-[#FD6C17]/10 rounded-full group-hover:scale-110 transition-transform" />
+
+              <div className={`relative z-10 pb-4 ${tip.accent}`}>
+                {tip.icon}
+              </div>
+
+              <div className="relative z-10">
+                <h3 className="text-2xl mb-2 leading-tight">{tip.title}</h3>
+                <p
+                  className={`text-base leading-relaxed ${tip.className.includes("bg-white") ? "text-[#1C1007]/60" : "opacity-80"}`}
+                >
+                  {tip.desc}
+                </p>
+              </div>
+
+              <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-[#FD6C17] group-hover:w-full transition-all duration-500" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Tips;
