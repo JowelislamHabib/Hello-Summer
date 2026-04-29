@@ -2,13 +2,11 @@ import { IoSunnyOutline, IoCartOutline } from "react-icons/io5";
 
 const NavBar = () => {
   return (
-    <div className="w-full bg-neutral-100 shadow">
+    <div className="w-full bg-neutral-100 shadow-sm">
       <div className=" container mx-auto flex items-center justify-between px-8 h-20">
         <div className="flex items-center gap-2">
           <IoSunnyOutline className="text-3xl text-orange-400 " />
-          <span className="text-2xl font-bold text-gray-900 ">
-            Hello Summer
-          </span>
+          <span className="text-2xl font-bold text-gray-900 ">SOLIS</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-10">

@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import HeroSlider from "@/components/HeroSlider";
+import PopularProducts from "@/components/PopularProducts";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       <body className="bg-background text-foreground">
         <NavBar />
         <HeroSlider />
+        <PopularProducts />
         <main> {children}</main>
         <Footer />
       </body>

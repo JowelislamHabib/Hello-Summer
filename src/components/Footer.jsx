@@ -37,7 +37,7 @@ export default function Footer() {
               >
                 <IoSunny className="text-2xl text-[#1C1007]" />
               </div>
-              <h3 className="text-2xl  text-[#FFFBF0]">HelloSummer</h3>
+              <h3 className="text-2xl  text-[#FFFBF0]">SOLIS</h3>
             </div>
             <p className="text-[#FFFBF0]/70 mb-6 leading-relaxed">
               Your tropical paradise for summer essentials. Curated collections
