@@ -20,7 +20,7 @@ const Tips = () => {
       desc: "Please ensure you apply a broad-spectrum sunscreen with an SPF of 50 or higher prior to outdoor activities. Apply the sunscreen 15 to 20 minutes before sun exposure, and reapply every two hours, especially if you are sweating or spending extended periods outdoors. Remember to cover often overlooked areas such as your ears, neck, and hands. For added protection, consider wearing sunglasses, a hat, and lightweight, long-sleeved clothing to reduce skin exposure to direct sunlight. Limiting outdoor activities during peak hours (10 a.m. to 4 p.m.) can help minimize the risk of sunburn, premature skin aging, and long-term skin damage caused by UV rays. Staying consistent with sun protection habits can significantly improve your skin’s overall health and resilience over time. Even on cloudy days, UV rays can penetrate the skin, so daily protection is essential.",
       icon: <IoSunnyOutline size={32} />,
       className:
-        "md:col-start-3 md:row-start-1 md:row-span-2 bg-[#FD6C17] text-white",
+        "md:col-start-3 md:row-start-1 md:row-span-2 bg-orange-500 text-white",
       accent: "text-white",
     },
     {
@@ -42,8 +42,8 @@ const Tips = () => {
     <section className="bg-50/30 py-20 px-4">
       <div className="container mx-auto">
         <div className="mb-12 border-l-8 border-[#1C1007] pl-6">
-          <h2 className="text-4xl md:text-5xl font-serif text-[#1C1007] tracking-tight">
-            Summer <span className="text-[#FD6C17]">Care Tips</span>
+          <h2 className="md:text-5xl text-5xl font-bold font-serif text-[#1C1007] tracking-tight">
+            Summer <span className="text-orange-500">Care Tips</span>
           </h2>
           <p className="text-[#1C1007]/60 mt-2 font-medium">
             Small habits for a better season.
@@ -54,9 +54,9 @@ const Tips = () => {
           {tips.map((tip, index) => (
             <div
               key={index}
-              className={`group relative p-8 rounded-xl border border-[#E8E4D8] overflow-hidden flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${tip.className}`}
+              className={`group relative p-8 rounded-xl border border-orange-50 overflow-hidden flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${tip.className}`}
             >
-              <div className="absolute top-4 right-4 w-10 h-10 bg-[#FD6C17]/10 rounded-full group-hover:scale-110 transition-transform" />
+              <div className="absolute top-4 right-4 w-10 h-10 bg-orange-500/10 rounded-full group-hover:scale-110 transition-transform" />
 
               <div className={`relative z-10 pb-4 ${tip.accent}`}>
                 {tip.icon}
@@ -71,7 +71,7 @@ const Tips = () => {
                 </p>
               </div>
 
-              <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-[#FD6C17] group-hover:w-full transition-all duration-500" />
+              <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-orange-500 group-hover:w-full transition-all duration-500" />
             </div>
           ))}
         </div>
