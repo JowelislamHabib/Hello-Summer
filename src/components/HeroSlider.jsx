@@ -18,7 +18,7 @@ export default function HeroSlider() {
   ];
 
   return (
-    <section className="w-full px-4 py-6 md:py-5">
+    <section className="bg-[#FFFBF0] w-full px-4 py-6 md:py-5">
       <div className="container mx-auto">
         <Swiper
           modules={[Autoplay, Pagination, EffectFade]}
