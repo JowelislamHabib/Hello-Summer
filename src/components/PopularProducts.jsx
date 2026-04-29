@@ -10,7 +10,7 @@ const PopularProducts = async () => {
     .slice(0, 4);
 
   return (
-    <section className="bg-[#FFF4E6] py-16 px-4">
+    <section className="bg-orange-50 py-16 px-4">
       <div className="container mx-auto">
         <div className="py-5">
           <div className="flex items-center justify-center">
