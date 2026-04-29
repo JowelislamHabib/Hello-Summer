@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 const PopularProducts = async () => {
   const products = await getProducts();
   const popularProducts = products
-    .filter((product) => product.rating >= 4.5)
+    .filter((product) => product.rating >= 4.6)
     .slice(0, 4);
 
   return (
