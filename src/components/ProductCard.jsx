@@ -1,34 +1,34 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { IoStar, IoCartOutline, IoEyeOutline } from "react-icons/io5";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, params }) => {
   const { name, brand, price, rating, image, stock, category } = product;
 
   return (
     <div className="group relative bg-white rounded-xl p-4 border border-[#E8E4D8]/60 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(253,108,23,0.15)] hover:border-orange-500/30">
-      {/* --- Image Section --- */}
       <div className="relative  overflow-hidden rounded-xl bg-[#F7F7F2]">
-        <img
+        <Image
           src={image}
           alt={name}
+          width={1000}
+          height={1000}
           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
         />
 
-        {/* Floating Category Badge - More minimal and modern */}
         <div className="absolute top-4 left-4 bg-white/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
           <p className="text-[10px] uppercase tracking-[0.15em] font-black text-stone-900/60">
             {category}
           </p>
         </div>
 
-        {/* Stock Indicator - Clean pill shape */}
         {stock < 15 && (
           <div className="absolute top-4 right-4 bg-orange-500 text-white text-[9px] uppercase tracking-wider font-black px-2.5 py-1 rounded-full shadow-lg">
             Low Stock
           </div>
         )}
 
-        {/* Hover Action Overlay */}
         <div className="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
           <button className="w-12 h-12 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xl hover:bg-stone-900 hover:text-white transition-all transform translate-y-8 group-hover:translate-y-0 duration-300">
             <IoEyeOutline size={20} />
@@ -39,10 +39,8 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      {/* --- Info Section --- */}
       <div className="px-2 pt-6 pb-2">
         <div className="flex justify-between items-center mb-2">
-          {/* Brand with extra letter spacing */}
           <p className="text-[10px] font-black text-orange-500 uppercase tracking-[0.2em]">
             {brand}
           </p>
@@ -54,7 +52,6 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
 
-        {/* Serif Font for high-end look */}
         <h3 className="text-xl antialiased font-serif text-stone-900 leading-tight mb-4 min-h-[3.5rem] line-clamp-2 transition-colors group-hover:text-orange-500">
           {name}
         </h3>
@@ -72,10 +69,11 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
 
-          {/* Pill-shaped button matching the header 'Register' button */}
-          <button className="px-6 py-3 bg-stone-900 text-[#FAF8F1] rounded-full font-bold text-xs uppercase tracking-widest hover:bg-orange-500 transition-all active:scale-95 shadow-md hover:shadow-orange-200">
-            Details
-          </button>
+          <Link href={"/products/01"}>
+            <button className="px-6 py-3 bg-stone-900 text-orange-50 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-orange-500 transition-all active:scale-95 shadow-md hover:shadow-orange-200 cursor-pointer">
+              Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

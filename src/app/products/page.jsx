@@ -1,7 +1,36 @@
+import { getProducts } from "@/lib/data";
 import React from "react";
+import Link from "next/link";
+import { IoArrowForwardOutline } from "react-icons/io5";
+import ProductCard from "@/components/ProductCard";
 
-const ProductsPage = () => {
-  return <div>This is the Products Page</div>;
+const ProductsPage = async () => {
+  const products = await getProducts();
+  const { name, brand, price, rating, image, stock, category } = products;
+
+  return (
+    <div className="bg-orange-50">
+      <div className="container mx-auto px-4 py-12">
+        <div className="flex justify-between items-center">
+          <div className="mb-12 border-l-8 border-stone-900 pl-6">
+            <h2 className="md:text-5xl text-2xl font-bold font-serif text-stone-900 tracking-tight">
+              All <span className="text-orange-500">Products</span>
+            </h2>
+            <p className="text-gray-900/60 mt-2 font-medium">
+              Explore our full range of summer essentials.
+            </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProductsPage;

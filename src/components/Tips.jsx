@@ -27,7 +27,7 @@ const Tips = () => {
       title: "Skincare Routine",
       desc: "Switch to a lightweight, gel-based moisturizer and gentle cleanser suitable for humid conditions. Avoid heavy creams that can clog pores. Regular cleansing and moisturizing help control excess oil, prevent breakouts, and keep your skin fresh throughout the day.",
       icon: <IoLeafOutline size={32} />,
-      className: "md:col-span-1 bg-stone-900 text-[#FAF8F1]",
+      className: "md:col-span-1 bg-stone-900 text-orange-50",
       accent: "text-[#FBA919]",
     },
     {
