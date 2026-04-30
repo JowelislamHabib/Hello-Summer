@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
+import { Check, Eye, EyeSlash, HandStop } from "@gravity-ui/icons";
 import {
   Button,
   Description,
@@ -10,11 +10,39 @@ import {
   InputGroup,
   Label,
   TextField,
+  Toast,
+  toast,
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const RegisterPage = () => {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const photo = formData.get("photo");
+
+    const { data, error } = await authClient.signUp.email({
+      name: name,
+      email: email,
+      password: password,
+      image: photo,
+      callbackURL: "/",
+    });
+    if (error) {
+      toast.danger(error.message, {
+        actionProps: {
+          children: "Remove",
+          variant: "danger",
+        },
+        description:
+          "Sorry toast you, but something went wrong during registration. Please try again.",
+        indicator: <HandStop />,
+      });
+    }
+    console.log(data, error, "--- Sign Up Response ---");
   };
 
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +53,7 @@ const RegisterPage = () => {
         <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
           <TextField
             isRequired
-            name="text"
+            name="name"
             type="text"
             validate={(value) => {
               if (value.trim() === "" || value.length < 3) {
@@ -37,6 +65,22 @@ const RegisterPage = () => {
           >
             <Label>Full Name</Label>
             <Input placeholder="John Doe" />
+            <FieldError />
+          </TextField>
+          <TextField
+            isRequired
+            name="photo"
+            type="url"
+            validate={(value) => {
+              if (!value.startsWith("https://")) {
+                return "Please enter a valid url (must start with https://)";
+              }
+
+              return null;
+            }}
+          >
+            <Label>Avatar</Label>
+            <Input placeholder="https://example.com/avatar.jpg" />
             <FieldError />
           </TextField>
           <TextField
@@ -61,8 +105,8 @@ const RegisterPage = () => {
             name="password"
             type="text"
             validate={(value) => {
-              if (value.length < 6) {
-                return "Password must be at least 6 characters long";
+              if (value.length < 8) {
+                return "Password must be at least 8 characters long";
               }
 
               return null;
@@ -72,7 +116,7 @@ const RegisterPage = () => {
             <InputGroup>
               <InputGroup.Input
                 type="text"
-                placeholder="Minimum 6 digits password"
+                placeholder="Minimum 8 digits password"
               />
               <InputGroup.Suffix className="pr-0">
                 <Button

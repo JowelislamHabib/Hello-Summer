@@ -6,7 +6,7 @@ import { IoStar, IoCartOutline, IoEyeOutline } from "react-icons/io5";
 const ProductCard = async ({ product, params }) => {
   const { name, brand, price, rating, image, stock, category, id } = product;
   const productId = await params;
-  console.log(productId, "Card");
+  // console.log(productId, "Card");
   return (
     <div className="group relative bg-white rounded-xl p-4 border border-[#E8E4D8]/60 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(253,108,23,0.15)] hover:border-orange-500/30">
       <div className="relative  overflow-hidden rounded-xl bg-[#F7F7F2]">

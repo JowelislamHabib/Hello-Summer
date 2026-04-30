@@ -2,6 +2,7 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import { Toast } from "@heroui/react";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         <NavBar />
         <main>{children}</main>
         <Footer />
+        <Toast.Provider placement="top" />
       </body>
     </html>
   );

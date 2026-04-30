@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import {
@@ -5,8 +6,22 @@ import {
   IoLockClosedOutline,
   IoArrowForward,
 } from "react-icons/io5";
-
+import { authClient } from "@/lib/auth-client";
 const LoginPage = () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const { data, error } = await authClient.signIn.email({
+      email: email,
+      password: password,
+      callbackURL: "/",
+    });
+    console.log(data, error, "--- Sign In Response ---");
+  };
+
   return (
     <div className="min-h-[calc(100vh-80px)] bg-stone-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
@@ -28,7 +43,7 @@ const LoginPage = () => {
         </div>
 
         <div className="bg-white p-8 md:p-10 rounded-xl border border-stone-200 shadow-xl shadow-stone-200/50">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={onSubmit}>
             <div className="space-y-2">
               <label className="text-stone-900 text-xs font-black uppercase tracking-widest ml-1">
                 Email Address
@@ -39,6 +54,7 @@ const LoginPage = () => {
                 </div>
                 <input
                   type="email"
+                  name="email"
                   placeholder="name@example.com"
                   className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                   required
@@ -64,6 +80,7 @@ const LoginPage = () => {
                 </div>
                 <input
                   type="password"
+                  name="password"
                   placeholder="••••••••"
                   className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                   required
