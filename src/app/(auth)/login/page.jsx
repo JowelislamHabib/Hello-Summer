@@ -11,6 +11,7 @@ const LoginPage = () => {
     <div className="min-h-[calc(100vh-80px)] bg-stone-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
+          =
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="h-0.5 w-8 bg-orange-500/30"></span>
             <span className="text-orange-500 text-xs font-black uppercase tracking-[0.4em]">
