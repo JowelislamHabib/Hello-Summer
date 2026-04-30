@@ -30,10 +30,6 @@ export default function RootLayout({ children }) {
         className={`${dmSans.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
         <NavBar />
-        <HeroSlider />
-        <PopularProducts />
-        <Tips />
-        <AllProducts />
         <main>{children}</main>
         <Footer />
       </body>

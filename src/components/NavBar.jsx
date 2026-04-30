@@ -1,4 +1,10 @@
-import { IoSunnyOutline, IoCartOutline } from "react-icons/io5";
+import Link from "next/link";
+import {
+  IoSunnyOutline,
+  IoCartOutline,
+  IoLogIn,
+  IoPersonAdd,
+} from "react-icons/io5";
 
 const NavBar = () => {
   return (
@@ -13,18 +19,18 @@ const NavBar = () => {
           </div>
 
           <nav className="hidden md:flex items-center gap-10">
-            <a
-              href="#"
+            <Link
+              href={"/"}
               className="text-base font-medium text-gray-900 hover:opacity-70 transition-opacity"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href={"/products"}
               className="text-base font-medium text-gray-900 hover:opacity-70 transition-opacity"
             >
               Products
-            </a>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -32,13 +38,20 @@ const NavBar = () => {
               <IoCartOutline className="text-2xl" />
             </button>
 
-            <button className="px-8 py-2.5 text-sm font-bold rounded-full border-2 border-orange-400 text-gray-900 hover:bg-orange-400 hover:text-white transition-all">
+            <Link
+              href={"/login"}
+              className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-xl border-2 border-amber-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.4)] transition-all active:scale-95"
+            >
+              <IoLogIn size={24} />
               Login
-            </button>
-
-            <button className="px-8 py-2.5 text-sm font-bold rounded-full bg-orange-400 text-white shadow-sm hover:brightness-110 transition-all">
+            </Link>
+            <Link
+              href={"/register"}
+              className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-xl border-2 border-amber-500 bg-linear-to-r from-amber-500 to-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.4)] transition-all active:scale-95"
+            >
+              <IoPersonAdd />
               Register
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,3 +1,7 @@
+import AllProducts from "@/components/AllProducts";
+import HeroSlider from "@/components/HeroSlider";
+import PopularProducts from "@/components/PopularProducts";
+import Tips from "@/components/Tips";
 import { getProducts } from "@/lib/data";
 
 export default async function Home() {
@@ -5,7 +9,10 @@ export default async function Home() {
   console.log(products);
   return (
     <>
-      <div></div>
+      <HeroSlider />
+      <PopularProducts />
+      <Tips />
+      <AllProducts />
     </>
   );
 }
