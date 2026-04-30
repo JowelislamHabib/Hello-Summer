@@ -21,7 +21,7 @@ const PopularProducts = async () => {
               Customer Favorites
             </div>
           </div>
-          <h1 className="text-center text-5xl font-bold font-serif antialiased pb-4">
+          <h1 className="text-center text-2xl md:text-5xl font-bold font-serif antialiased pb-4">
             Popular <span className="text-orange-600">Products</span>
           </h1>
         </div>

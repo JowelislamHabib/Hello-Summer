@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
   const { name, brand, price, rating, image, stock, category } = product;
 
   return (
-    <div className="group relative bg-white rounded-xl p-4 border border-[#E8E4D8]/60 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(253,108,23,0.15)] hover:border-[#FD6C17]/30">
+    <div className="group relative bg-white rounded-xl p-4 border border-[#E8E4D8]/60 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(253,108,23,0.15)] hover:border-orange-500/30">
       {/* --- Image Section --- */}
       <div className="relative  overflow-hidden rounded-xl bg-[#F7F7F2]">
         <img
@@ -16,24 +16,24 @@ const ProductCard = ({ product }) => {
 
         {/* Floating Category Badge - More minimal and modern */}
         <div className="absolute top-4 left-4 bg-white/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-          <p className="text-[10px] uppercase tracking-[0.15em] font-black text-[#1C1007]/60">
+          <p className="text-[10px] uppercase tracking-[0.15em] font-black text-stone-900/60">
             {category}
           </p>
         </div>
 
         {/* Stock Indicator - Clean pill shape */}
         {stock < 15 && (
-          <div className="absolute top-4 right-4 bg-[#FD6C17] text-white text-[9px] uppercase tracking-wider font-black px-2.5 py-1 rounded-full shadow-lg">
+          <div className="absolute top-4 right-4 bg-orange-500 text-white text-[9px] uppercase tracking-wider font-black px-2.5 py-1 rounded-full shadow-lg">
             Low Stock
           </div>
         )}
 
         {/* Hover Action Overlay */}
-        <div className="absolute inset-0 bg-[#1C1007]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-          <button className="w-12 h-12 bg-white text-[#1C1007] rounded-full flex items-center justify-center shadow-xl hover:bg-[#1C1007] hover:text-white transition-all transform translate-y-8 group-hover:translate-y-0 duration-300">
+        <div className="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+          <button className="w-12 h-12 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xl hover:bg-stone-900 hover:text-white transition-all transform translate-y-8 group-hover:translate-y-0 duration-300">
             <IoEyeOutline size={20} />
           </button>
-          <button className="w-12 h-12 bg-[#FD6C17] text-white rounded-full flex items-center justify-center shadow-xl hover:bg-[#1C1007] transition-all transform translate-y-8 group-hover:translate-y-0 duration-500">
+          <button className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-stone-900 transition-all transform translate-y-8 group-hover:translate-y-0 duration-500">
             <IoCartOutline size={20} />
           </button>
         </div>
@@ -43,37 +43,37 @@ const ProductCard = ({ product }) => {
       <div className="px-2 pt-6 pb-2">
         <div className="flex justify-between items-center mb-2">
           {/* Brand with extra letter spacing */}
-          <p className="text-[10px] font-black text-[#FD6C17] uppercase tracking-[0.2em]">
+          <p className="text-[10px] font-black text-orange-500 uppercase tracking-[0.2em]">
             {brand}
           </p>
           <div className="flex items-center gap-1 bg-[#FBA919]/10 px-2 py-0.5 rounded-full">
             <IoStar className="text-[#FBA919]" size={12} />
-            <span className="text-[11px] font-black text-[#1C1007]">
+            <span className="text-[11px] font-black text-stone-900">
               {rating}
             </span>
           </div>
         </div>
 
         {/* Serif Font for high-end look */}
-        <h3 className="text-xl antialiased font-serif text-[#1C1007] leading-tight mb-4 min-h-[3.5rem] line-clamp-2 transition-colors group-hover:text-[#FD6C17]">
+        <h3 className="text-xl antialiased font-serif text-stone-900 leading-tight mb-4 min-h-[3.5rem] line-clamp-2 transition-colors group-hover:text-orange-500">
           {name}
         </h3>
 
         <div className="flex items-center justify-between border-t border-[#E8E4D8]/40 pt-4">
           <div className="flex flex-col">
-            <span className="text-[10px] text-[#1C1007]/40 font-black uppercase tracking-widest">
+            <span className="text-[10px] text-stone-900/40 font-black uppercase tracking-widest">
               Price
             </span>
             <div className="flex items-start">
-              <span className="text-sm font-bold text-[#1C1007] mt-1">$</span>
-              <span className="text-3xl font-black text-[#1C1007] tracking-tighter">
+              <span className="text-sm font-bold text-stone-900 mt-1">$</span>
+              <span className="text-3xl font-black text-stone-900 tracking-tighter">
                 {price}
               </span>
             </div>
           </div>
 
           {/* Pill-shaped button matching the header 'Register' button */}
-          <button className="px-6 py-3 bg-[#1C1007] text-[#FAF8F1] rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#FD6C17] transition-all active:scale-95 shadow-md hover:shadow-orange-200">
+          <button className="px-6 py-3 bg-stone-900 text-[#FAF8F1] rounded-full font-bold text-xs uppercase tracking-widest hover:bg-orange-500 transition-all active:scale-95 shadow-md hover:shadow-orange-200">
             Details
           </button>
         </div>
