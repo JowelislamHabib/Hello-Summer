@@ -7,7 +7,7 @@
     "rating": 4.7,
     "stock": 12,
     "description": "Stylish UV protection sunglasses perfect for bright summer days.",
-    "image": "https://i.ibb.co.com/CpbmbsRg/image.png",
+    "image": "/product-images/UVProtectionSunglasses.png",
     "category": "Accessories"
   },
   {
@@ -18,7 +18,7 @@
     "rating": 4.5,
     "stock": 20,
     "description": "Lightweight breathable cotton t-shirt ideal for hot weather.",
-    "image": "https://i.ibb.co.com/tpL3K4YY/image.png",
+    "image": "/product-images/CottonSummert-Shirt.png",
     "category": "Clothing"
   },
   {
@@ -29,7 +29,7 @@
     "rating": 4.6,
     "stock": 15,
     "description": "Comfortable quick-dry beach shorts for swimming and casual wear.",
-    "image": "https://i.ibb.co.com/Dg1xykRW/image.png",
+    "image": "/product-images/BeachShorts.png",
     "category": "Clothing"
   },
   {
@@ -40,7 +40,7 @@
     "rating": 4.4,
     "stock": 10,
     "description": "Classic straw hat to keep you cool and protected from the sun.",
-    "image": "https://i.ibb.co.com/TqbbLNK4/image.png",
+    "image": "/product-images/StrawSummerHat.png",
     "category": "Accessories"
   },
   {
@@ -51,7 +51,7 @@
     "rating": 4.3,
     "stock": 25,
     "description": "Comfortable and lightweight flip flops for beach and casual wear.",
-    "image": "https://i.ibb.co.com/4nbYS0sh/image.png",
+    "image": "/product-images/FlipFlops.png",
     "category": "Footwear"
   },
   {
@@ -62,7 +62,7 @@
     "rating": 4.5,
     "stock": 18,
     "description": "Breathable sports cap with sweat-wicking fabric for summer workouts.",
-    "image": "https://i.ibb.co.com/YFjYvMh2/image.png",
+    "image": "/product-images/CoolingSportsCap.png",
     "category": "Accessories"
   },
   {
@@ -73,7 +73,7 @@
     "rating": 4.8,
     "stock": 14,
     "description": "Premium linen shirt designed for maximum airflow and comfort.",
-    "image": "https://i.ibb.co.com/k2Hm0NS3/image.png",
+    "image": "/product-images/LinenShirt.png",
     "category": "Clothing"
   },
   {
@@ -84,7 +84,7 @@
     "rating": 4.7,
     "stock": 9,
     "description": "High-quality polarized sunglasses for glare-free outdoor experience.",
-    "image": "https://i.ibb.co.com/RpJZkfym/image.png",
+    "image": "/product-images/PolarizedSunglasses.png",
     "category": "Accessories"
   },
   {
@@ -95,7 +95,7 @@
     "rating": 4.4,
     "stock": 22,
     "description": "Soft and stretchy tank top perfect for gym and hot days.",
-    "image": "https://i.ibb.co.com/cK1m5kt6/image.png",
+    "image": "/product-images/TankTop.png",
     "category": "Clothing"
   },
   {
@@ -106,7 +106,7 @@
     "rating": 4.6,
     "stock": 11,
     "description": "Spacious tote bag for carrying beach essentials.",
-    "image": "https://i.ibb.co.com/SDJWGngW/image.png",
+    "image": "/product-images/BeachToteBag.png",
     "category": "Accessories"
   },
   {
@@ -117,7 +117,7 @@
     "rating": 4.5,
     "stock": 13,
     "description": "Durable and stylish sandals for everyday summer wear.",
-    "image": "https://i.ibb.co.com/GQ556fLz/image.png",
+    "image": "/product-images/CasualSandals.png",
     "category": "Footwear"
   },
   {
@@ -128,7 +128,7 @@
     "rating": 4.7,
     "stock": 30,
     "description": "Leak-proof water bottle to keep you hydrated all day.",
-    "image": "https://i.ibb.co.com/NgpHpQDF/image.png",
+    "image": "/product-images/WaterBottle.png",
     "category": "Essentials"
   }
 ]
