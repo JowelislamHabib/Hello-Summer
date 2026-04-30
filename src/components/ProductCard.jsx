@@ -3,9 +3,10 @@ import Link from "next/link";
 import React from "react";
 import { IoStar, IoCartOutline, IoEyeOutline } from "react-icons/io5";
 
-const ProductCard = ({ product, params }) => {
-  const { name, brand, price, rating, image, stock, category } = product;
-
+const ProductCard = async ({ product, params }) => {
+  const { name, brand, price, rating, image, stock, category, id } = product;
+  const productId = await params;
+  console.log(productId, "Card");
   return (
     <div className="group relative bg-white rounded-xl p-4 border border-[#E8E4D8]/60 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(253,108,23,0.15)] hover:border-orange-500/30">
       <div className="relative  overflow-hidden rounded-xl bg-[#F7F7F2]">
@@ -52,7 +53,7 @@ const ProductCard = ({ product, params }) => {
           </div>
         </div>
 
-        <h3 className="text-xl antialiased font-serif text-stone-900 leading-tight mb-4 min-h-[3.5rem] line-clamp-2 transition-colors group-hover:text-orange-500">
+        <h3 className="text-xl antialiased font-serif text-stone-900 leading-tight mb-4 min-h-14 line-clamp-2 transition-colors group-hover:text-orange-500">
           {name}
         </h3>
 
@@ -69,7 +70,7 @@ const ProductCard = ({ product, params }) => {
             </div>
           </div>
 
-          <Link href={"/products/01"}>
+          <Link href={`/products/${id}`}>
             <button className="px-6 py-3 bg-stone-900 text-orange-50 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-orange-500 transition-all active:scale-95 shadow-md hover:shadow-orange-200 cursor-pointer">
               Details
             </button>

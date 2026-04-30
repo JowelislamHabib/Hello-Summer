@@ -7,7 +7,6 @@ import ProductCard from "@/components/ProductCard";
 const ProductsPage = async () => {
   const products = await getProducts();
   const { name, brand, price, rating, image, stock, category } = products;
-
   return (
     <div className="bg-orange-50">
       <div className="container mx-auto px-4 py-12">

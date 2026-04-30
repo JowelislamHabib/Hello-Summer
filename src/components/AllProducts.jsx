@@ -8,7 +8,7 @@ const AllProducts = async () => {
   const products = await getProducts();
   const allProducts = products.slice(0, 8);
 
-  console.log(allProducts, "--- All Products ---");
+  // console.log(allProducts, "--- All Products ---");
   const { name, brand, price, rating, image, stock, category } = allProducts[0];
 
   return (

@@ -9,13 +9,15 @@ const NavBar = () => {
       <div className="container mx-auto">
         <div className="  flex items-center justify-between px-4 md:px-0 h-20">
           <div className="flex items-center gap-2">
-            <Image
-              src={logo}
-              alt="Solis Logo"
-              width={120}
-              height={40}
-              className="w-auto h-auto"
-            />
+            <Link href={"/"}>
+              <Image
+                src={logo}
+                alt="Solis Logo"
+                width={120}
+                height={40}
+                className="w-auto h-auto"
+              />
+            </Link>
           </div>
 
           <nav className="hidden md:flex items-center gap-10">

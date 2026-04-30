@@ -1,3 +1,4 @@
+import { getProducts } from "@/lib/data";
 import Image from "next/image";
 import React from "react";
 import {
@@ -9,19 +10,17 @@ import {
   IoLeafOutline,
 } from "react-icons/io5";
 
-const ProductDetailsPage = () => {
-  const product = {
-    id: 1,
-    name: "UV Protection Sunglasses",
-    brand: "SunShade",
-    price: 15,
-    rating: 4.7,
-    stock: 12,
-    description:
-      "Stylish UV protection sunglasses perfect for bright summer days. Designed with high-quality polarized lenses to eliminate glare while maintaining color integrity.",
-    image: "https://i.ibb.co.com/CpbmbsRg/image.png",
-    category: "Accessories",
-  };
+const ProductDetailsPage = async ({ params }) => {
+  const singleProduct = await params;
+  const prodductId = singleProduct.id;
+  console.log(prodductId);
+
+  const products = await getProducts();
+
+const product = products.find((item) => item.id === parseInt(prodductId));
+
+  const { name, brand, price, rating, image, stock, category, description } = product;
+  console.log(name, "Single Product");
 
   const trustFeatures = [
     {
@@ -53,15 +52,15 @@ const ProductDetailsPage = () => {
           <div className="sticky top-24">
             <div className="relative overflow-hidden rounded-xl bg-white border border-stone-200 shadow-sm">
               <Image
-                src={product.image}
-                alt={product.name}
+                src={image}
+                alt={name}
                 height={800}
                 width={800}
                 className="w-full h-full object-contain"
               />
               <div className="absolute top-6 left-6 bg-white/80 backdrop-blur-md px-4 py-2 rounded-xl">
                 <span className="text-stone-900 text-xs font-black uppercase tracking-widest">
-                  {product.category}
+                  {category}
                 </span>
               </div>
             </div>
@@ -70,21 +69,21 @@ const ProductDetailsPage = () => {
           <div className="flex flex-col">
             <div className="mb-8">
               <p className="text-orange-500 font-black uppercase tracking-[0.3em] text-xs mb-3">
-                {product.brand}
+                {brand}
               </p>
               <h1 className="text-5xl md:text-6xl font-serif text-stone-900 tracking-tighter leading-none mb-6">
-                {product.name}
+                {name}
               </h1>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1 bg-orange-50 px-3 py-1 rounded-xl">
                   <IoStar className="text-orange-500" size={16} />
                   <span className="text-sm font-black text-stone-900">
-                    {product.rating}
+                    {rating}
                   </span>
                 </div>
                 <span className="text-stone-900/40 text-sm font-medium">|</span>
                 <span className="text-stone-900/60 text-sm font-medium italic">
-                  {product.stock} pieces remaining
+                  {stock} pieces remaining
                 </span>
               </div>
             </div>
@@ -92,7 +91,7 @@ const ProductDetailsPage = () => {
             <div className="bg-white rounded-lg p-8 border border-stone-200 mb-10 shadow-sm">
               <div className="flex items-end gap-2 mb-8">
                 <span className="text-5xl font-black text-stone-900 tracking-tighter">
-                  ${product.price}
+                  ${price}
                 </span>
                 <span className="text-stone-900/40 text-lg mb-1 font-medium">
                   USD
@@ -100,7 +99,7 @@ const ProductDetailsPage = () => {
               </div>
 
               <p className="text-stone-900/70 leading-relaxed mb-8 text-lg">
-                {product.description}
+                {description}
               </p>
 
               <button className="w-full py-5 bg-stone-900 text-stone-50 rounded-xl font-bold text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-orange-500 transition-all active:scale-[0.98] shadow-xl shadow-stone-200">
