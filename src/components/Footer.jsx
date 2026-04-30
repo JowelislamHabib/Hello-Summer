@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   IoSunny,
   IoMailOutline,
@@ -7,8 +8,9 @@ import {
   IoLogoTwitter,
   IoLogoInstagram,
   IoLogoYoutube,
-  IoSunnySharp,
 } from "react-icons/io5";
+
+import logoDark from "../../public/solis-logo-white.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,16 +25,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #F59E0B 0%, #F97316 100%)",
-                }}
-              >
-                <IoSunny className="text-2xl text-stone-900" />
-              </div>
-              <h3 className="text-2xl  text-amber-50">SOLIS</h3>
+              <Image
+                src={logoDark}
+                alt="Solis Logo"
+                width={120}
+                height={40}
+                className="w-auto h-auto"
+              />
             </div>
             <p className="text-amber-50/70 mb-6 leading-relaxed">
               Your tropical paradise for summer essentials. Curated collections

@@ -1,10 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  IoSunnyOutline,
-  IoCartOutline,
-  IoLogIn,
-  IoPersonAdd,
-} from "react-icons/io5";
+import logo from "../../public/solis-logo.png";
+import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
 
 const NavBar = () => {
   return (
@@ -12,10 +9,13 @@ const NavBar = () => {
       <div className="container mx-auto">
         <div className="  flex items-center justify-between px-4 md:px-0 h-20">
           <div className="flex items-center gap-2">
-            <IoSunnyOutline className="text-3xl text-orange-400 " />
-            <span className="text-2xl font-black text-gray-900 font-serif ">
-              SOLIS
-            </span>
+            <Image
+              src={logo}
+              alt="Solis Logo"
+              width={120}
+              height={40}
+              className="w-auto h-auto"
+            />
           </div>
 
           <nav className="hidden md:flex items-center gap-10">
