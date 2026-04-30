@@ -33,7 +33,7 @@ const AllProducts = async () => {
         </div>
         <div className="flex justify-center items-center mx-auto py-10">
           <Link href={"/products"}>
-            <button className="justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-amber-500 bg-linear-to-r from-amber-500 to-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.4)] transition-all active:scale-95 cursor-pointer">
+            <button className="justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.4)] transition-all active:scale-95 cursor-pointer">
               View All Products
               <IoArrowForwardOutline size={18} className="inline-block ml-1" />
             </button>

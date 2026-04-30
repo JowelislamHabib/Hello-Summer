@@ -2,10 +2,6 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import HeroSlider from "@/components/HeroSlider";
-import PopularProducts from "@/components/PopularProducts";
-import Tips from "@/components/Tips";
-import AllProducts from "@/components/AllProducts";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -19,8 +15,11 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Hello Summer",
+  title: "Solis Summer",
   description: "Premium Men’s Seasonal Essentials",
+  icons: {
+    icon: "/public/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
