@@ -39,7 +39,7 @@ const Tips = () => {
     },
   ];
   return (
-    <section className="bg-linear-to-t from-amber-50 via-yellow-50 to-orange-100 py-20 px-4">
+    <section className="bg-stone-50 py-20 px-4">
       <div className="container mx-auto">
         <div className="mb-12 border-l-8 border-stone-900 pl-6">
           <h2 className="md:text-5xl text-2xl font-bold font-serif text-stone-900 tracking-tight">
@@ -50,11 +50,11 @@ const Tips = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows ">
           {tips.map((tip, index) => (
             <div
               key={index}
-              className={`group relative p-8 rounded-xl border border-orange-50 overflow-hidden flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${tip.className}`}
+              className={`group relative p-8 rounded-xl bg-amber-100 border border-orange-50 overflow-hidden flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:-translate-y-1  ${tip.className}`}
             >
               <div className="absolute top-4 right-4 w-10 h-10 bg-orange-500/10 rounded-full group-hover:scale-110 transition-transform" />
 
@@ -65,7 +65,7 @@ const Tips = () => {
               <div className="relative z-10">
                 <h3 className="text-2xl mb-2 leading-tight">{tip.title}</h3>
                 <p
-                  className={`text-base leading-relaxed ${tip.className.includes("bg-white") ? "text-stone-900/60" : "opacity-80"}`}
+                  className={`text-base leading-relaxed ${tip.className.includes("bg-amber-100") ? "text-stone-900/60" : "opacity-80"}`}
                 >
                   {tip.desc}
                 </p>
