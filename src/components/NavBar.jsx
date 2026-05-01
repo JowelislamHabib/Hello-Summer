@@ -1,14 +1,20 @@
-"use client"; // Required to use usePathname
-
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "../../public/solis-logo.png";
 import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
 import { Avatar, Dropdown, Label } from "@heroui/react";
-import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
+import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
+import { authClient } from "@/lib/auth-client";
+
 const NavBar = () => {
   const pathname = usePathname();
+
+  const userData = authClient.useSession();
+  const user = userData.data?.user;
+
+  console.log(user);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -54,59 +60,68 @@ const NavBar = () => {
               );
             })}
           </nav>
-          <div className="flex items-center gap-4">
-            <button className="flex items-center justify-center w-11 h-11 rounded-full bg-orange-500 text-stone-50 transition-transform active:scale-95 shadow-md cursor-pointer">
+          <div className="flex items-center justify-center gap-4">
+            <button className="flex items-center justify-center w-11 h-11 rounded-full bg-orange-500 text-stone-50 transition-transform active:scale-95 shadow-md cursor-pointer shrink-0">
               <IoCartOutline className="text-2xl" />
             </button>
 
-            <div>
-              <Dropdown>
-                <Dropdown.Trigger className="rounded-xl">
-                  <Avatar>
-                    <Avatar.Image
-                      alt="John Doe"
-                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-                    />
-                    <Avatar.Fallback>JD</Avatar.Fallback>
+            {user && (
+              <Dropdown placement="bottom">
+                <Dropdown.Trigger className="flex items-center justify-center rounded-full outline-none shrink-0">
+                  <Avatar
+                    size="lg"
+                    className="border-2 border-orange-500 rounded-full object-cover cursor-pointer"
+                  >
+                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback>
+                      {user?.name
+                        ?.split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </Avatar.Fallback>
                   </Avatar>
                 </Dropdown.Trigger>
-                <Dropdown.Popover className="rounded-xl">
+
+                <Dropdown.Popover className="rounded-xl mt-2" align="center">
                   <div className="px-3 pt-3 pb-1">
                     <div className="flex items-center gap-2">
-                      <Avatar size="sm">
-                        <Avatar.Image
-                          alt="John Doe"
-                          src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-                        />
-                        <Avatar.Fallback>JD</Avatar.Fallback>
+                      <Avatar size="md">
+                        <Avatar.Image alt={user?.name} src={user?.image} />
+                        <Avatar.Fallback>
+                          {user?.name
+                            ?.split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </Avatar.Fallback>
                       </Avatar>
                       <div className="flex flex-col gap-0">
                         <p className="text-sm leading-5 font-medium">
-                          Jane Doe
+                          {user?.name}
                         </p>
                         <p className="text-xs leading-none text-muted">
-                          jane@example.com
+                          {user?.email}
                         </p>
                       </div>
                     </div>
                   </div>
+
                   <Dropdown.Menu>
-                    <Dropdown.Item id="profile" textValue="Profile">
+                    <Dropdown.Item id="profile">
                       <Label>Profile</Label>
                     </Dropdown.Item>
-                    <Dropdown.Item id="settings" textValue="Settings">
+
+                    <Dropdown.Item id="settings">
                       <div className="flex w-full items-center justify-between gap-2">
                         <Label>Settings</Label>
                         <Gear className="size-3.5 text-muted" />
                       </div>
                     </Dropdown.Item>
 
-                    <Dropdown.Item
-                      id="logout"
-                      textValue="Logout"
-                      variant="danger"
-                    >
-                      <div className="flex w-full items-center justify-between gap-2">
+                    <Dropdown.Item id="logout" variant="danger">
+                      <div
+                        onClick={async () => await authClient.signOut()}
+                        className="flex w-full items-center justify-between gap-2"
+                      >
                         <Label>Log Out</Label>
                         <ArrowRightFromSquare className="size-3.5 text-danger" />
                       </div>
@@ -114,22 +129,26 @@ const NavBar = () => {
                   </Dropdown.Menu>
                 </Dropdown.Popover>
               </Dropdown>
-            </div>
+            )}
 
-            <Link
-              href={"/login"}
-              className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.2)] transition-all active:scale-95 hidden md:flex"
-            >
-              <IoLogIn size={24} />
-              Login
-            </Link>
-            <Link
-              href={"/register"}
-              className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.3)] transition-all active:scale-95 hidden md:flex"
-            >
-              <IoPersonAdd />
-              Register
-            </Link>
+            {!user && (
+              <div className="flex gap-4 justify-center items-center">
+                <Link
+                  href={"/login"}
+                  className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.2)] transition-all active:scale-95 hidden md:flex"
+                >
+                  <IoLogIn size={24} />
+                  Login
+                </Link>
+                <Link
+                  href={"/register"}
+                  className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.3)] transition-all active:scale-95 hidden md:flex"
+                >
+                  <IoPersonAdd />
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
