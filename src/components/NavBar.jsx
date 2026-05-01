@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "../../public/solis-logo.png";
 import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
-
+import { Avatar, Dropdown, Label } from "@heroui/react";
+import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
 const NavBar = () => {
   const pathname = usePathname();
 
@@ -58,6 +59,63 @@ const NavBar = () => {
               <IoCartOutline className="text-2xl" />
             </button>
 
+            <div>
+              <Dropdown>
+                <Dropdown.Trigger className="rounded-xl">
+                  <Avatar>
+                    <Avatar.Image
+                      alt="John Doe"
+                      src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                    />
+                    <Avatar.Fallback>JD</Avatar.Fallback>
+                  </Avatar>
+                </Dropdown.Trigger>
+                <Dropdown.Popover className="rounded-xl">
+                  <div className="px-3 pt-3 pb-1">
+                    <div className="flex items-center gap-2">
+                      <Avatar size="sm">
+                        <Avatar.Image
+                          alt="John Doe"
+                          src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                        />
+                        <Avatar.Fallback>JD</Avatar.Fallback>
+                      </Avatar>
+                      <div className="flex flex-col gap-0">
+                        <p className="text-sm leading-5 font-medium">
+                          Jane Doe
+                        </p>
+                        <p className="text-xs leading-none text-muted">
+                          jane@example.com
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <Dropdown.Menu>
+                    <Dropdown.Item id="profile" textValue="Profile">
+                      <Label>Profile</Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="settings" textValue="Settings">
+                      <div className="flex w-full items-center justify-between gap-2">
+                        <Label>Settings</Label>
+                        <Gear className="size-3.5 text-muted" />
+                      </div>
+                    </Dropdown.Item>
+
+                    <Dropdown.Item
+                      id="logout"
+                      textValue="Logout"
+                      variant="danger"
+                    >
+                      <div className="flex w-full items-center justify-between gap-2">
+                        <Label>Log Out</Label>
+                        <ArrowRightFromSquare className="size-3.5 text-danger" />
+                      </div>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown.Popover>
+              </Dropdown>
+            </div>
+
             <Link
               href={"/login"}
               className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.2)] transition-all active:scale-95 hidden md:flex"
@@ -65,7 +123,6 @@ const NavBar = () => {
               <IoLogIn size={24} />
               Login
             </Link>
-
             <Link
               href={"/register"}
               className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.3)] transition-all active:scale-95 hidden md:flex"

@@ -79,7 +79,7 @@ const RegisterPage = () => {
               return null;
             }}
           >
-            <Label>Avatar</Label>
+            <Label>Avatar URL</Label>
             <Input placeholder="https://example.com/avatar.jpg" />
             <FieldError />
           </TextField>
@@ -115,7 +115,7 @@ const RegisterPage = () => {
             <Label>Password</Label>
             <InputGroup>
               <InputGroup.Input
-                type="text"
+                type={isVisible ? "text" : "password"}
                 placeholder="Minimum 8 digits password"
               />
               <InputGroup.Suffix className="pr-0">
