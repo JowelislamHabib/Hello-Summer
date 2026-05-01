@@ -8,13 +8,7 @@ import {
   IoAlertCircleOutline,
 } from "react-icons/io5";
 import { authClient } from "@/lib/auth-client";
-import {
-  FieldError,
-  Form,
-  Input,
-  TextField,
-  toast,
-} from "@heroui/react";
+import { FieldError, Form, Input, TextField, toast } from "@heroui/react";
 
 const LoginPage = () => {
   const onSubmit = async (e) => {
@@ -108,12 +102,6 @@ const LoginPage = () => {
                 <label className="text-stone-900 text-xs font-black uppercase tracking-widest">
                   Password
                 </label>
-                <Link
-                  href="#"
-                  className="text-orange-500 text-[10px] font-black uppercase tracking-tighter hover:underline"
-                >
-                  Forgot?
-                </Link>
               </div>
               <div className="relative flex items-center">
                 <IoLockClosedOutline className="absolute left-4 text-stone-400 size-5 z-10" />

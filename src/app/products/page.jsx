@@ -3,13 +3,14 @@ import React from "react";
 import Link from "next/link";
 import { IoArrowForwardOutline } from "react-icons/io5";
 import ProductCard from "@/components/ProductCard";
+import "animate.css";
 
 const ProductsPage = async () => {
   const products = await getProducts();
   const { name, brand, price, rating, image, stock, category } = products;
   return (
     <div className="bg-orange-50">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 animate__animated animate__slideInUp py-12">
         <div className="flex justify-between items-center">
           <div className="mb-12 border-l-8 border-stone-900 pl-6">
             <h2 className="md:text-5xl text-2xl font-bold font-serif text-stone-900 tracking-tight">

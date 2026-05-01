@@ -5,6 +5,7 @@ import {
   IoLeafOutline,
   IoShirtOutline,
 } from "react-icons/io5";
+import "animate.css";
 
 const Tips = () => {
   const tips = [
@@ -40,7 +41,7 @@ const Tips = () => {
   ];
   return (
     <section className="bg-stone-50 py-20 px-4">
-      <div className="container mx-auto">
+      <div className="container mx-auto animate__animated animate__slideInUp">
         <div className="mb-12 border-l-8 border-stone-900 pl-6">
           <h2 className="md:text-5xl text-2xl font-bold font-serif text-stone-900 tracking-tight">
             Summer <span className="text-orange-500">Care Tips</span>
