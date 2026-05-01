@@ -6,157 +6,161 @@ import {
   IoSettingsOutline,
   IoMailOutline,
   IoLocationOutline,
-  IoShieldCheckmarkOutline,
   IoCubeOutline,
   IoHeartOutline,
+  IoShieldCheckmarkOutline,
+  IoChevronForward,
 } from "react-icons/io5";
+import { authClient } from "@/lib/auth-client";
 
 const MyProfile = () => {
-  const user = {
-    name: "Jane Doe",
-    email: "jane@example.com",
-    location: "Dhaka, Bangladesh",
-    status: "Verified Member",
-    joined: "January 2026",
-    avatar: "https://img.heroui.chat/image/avatar?w=400&h=400&u=3",
-  };
+  const { data, isPending } = authClient.useSession();
+  const user = data?.user;
+  console.log(user);
+  if (isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="font-serif italic animate-pulse">Loading profile...</p>
+      </div>
+    );
+  }
 
-  const stats = [
-    { label: "Orders", value: "12", icon: <IoCubeOutline /> },
-    { label: "Wishlist", value: "24", icon: <IoHeartOutline /> },
-    { label: "Reviews", value: "8", icon: <IoShieldCheckmarkOutline /> },
+  const menuItems = [
+    { label: "Order History", icon: <IoCubeOutline />, count: "12" },
+    { label: "My Wishlist", icon: <IoHeartOutline />, count: "24" },
+    {
+      label: "Security & Privacy",
+      icon: <IoShieldCheckmarkOutline />,
+      count: null,
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-orange-50/30 pb-20 font-sans">
-      {/* Editorial Header */}
-      <div className="h-64 bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073')] bg-cover bg-center relative">
-        <div className="absolute inset-0 bg-stone-900/20 backdrop-blur-[2px]" />
-      </div>
-
-      <div className="container mx-auto px-4 -mt-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Sidebar */}
-          <div className="lg:col-span-4">
-            <Card className="border-none shadow-xl bg-white/80 backdrop-blur-md rounded-3xl p-4">
-              <Card.Content className="flex flex-col items-center text-center py-8">
-                <Avatar
-                  src={user.avatar}
-                  className="w-32 h-32 ring-4 ring-orange-500 ring-offset-4 mb-6"
-                />
-                <h1 className="text-2xl font-bold text-stone-900 mb-1">
-                  {user.name}
+    <div className="min-h-screen bg-stone-50 py-12 px-4 font-sans">
+      <div className="container mx-auto space-y-6">
+        {/* Top Profile Bar */}
+        <Card className="border border-stone-200 shadow-sm rounded-xl overflow-hidden bg-white">
+          <Card.Content className="p-6 md:p-10 flex flex-col md:flex-row items-center gap-8">
+            <Avatar
+              src={user?.image}
+              className="w-32 h-32 rounded-xl ring-4 ring-stone-50"
+            />
+            <div className="flex-1 text-center md:text-left space-y-2">
+              <div className="flex flex-col md:flex-row md:items-center gap-3">
+                <h1 className="text-4xl font-serif text-stone-900 tracking-tight">
+                  {user?.name}
                 </h1>
                 <Chip
                   variant="flat"
-                  className="bg-orange-100 text-orange-700 font-bold uppercase tracking-wider mb-6 text-[10px] h-6"
+                  className="bg-orange-500 text-white font-black uppercase tracking-[0.2em] text-[9px] h-5 rounded-md self-center md:self-auto"
                 >
-                  {user.status}
+                  {user?.status}
                 </Chip>
+              </div>
+              <p className="text-stone-500 font-medium flex items-center justify-center md:justify-start gap-2">
+                <IoLocationOutline className="text-orange-500" />{" "}
+                {user?.location}
+              </p>
+            </div>
+            <Button
+              className="bg-stone-900 text-stone-50 font-bold px-8 h-12 rounded-xl hover:bg-orange-500 transition-all active:scale-95 text-xs uppercase tracking-widest"
+              startContent={<IoSettingsOutline size={18} />}
+            >
+              Account Settings
+            </Button>
+          </Card.Content>
+        </Card>
 
-                <div className="w-full space-y-4 mb-8 text-left">
-                  <div className="flex items-center gap-3 text-stone-600 px-4">
-                    <IoMailOutline className="text-xl text-orange-500" />
-                    <span className="text-sm font-medium">{user.email}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-stone-600 px-4">
-                    <IoLocationOutline className="text-xl text-orange-500" />
-                    <span className="text-sm font-medium">{user.location}</span>
-                  </div>
-                </div>
-
-                <Button
-                  className="w-full bg-stone-900 text-white font-bold h-12 rounded-2xl transition-transform active:scale-95"
-                  startContent={<IoSettingsOutline size={20} />}
-                >
-                  Edit Profile
-                </Button>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Navigation & Stats */}
+          <div className="md:col-span-5 space-y-6">
+            <Card className="border border-stone-200 shadow-sm rounded-xl bg-white">
+              <Card.Header className="px-6 pt-6 pb-2">
+                <Card.Title className="text-xs font-black uppercase tracking-[0.3em] text-stone-400">
+                  Quick Access
+                </Card.Title>
+              </Card.Header>
+              <Card.Content className="p-2 space-y-1">
+                {menuItems.map((item) => (
+                  <button
+                    key={item.label}
+                    className="w-full flex items-center justify-between p-4 hover:bg-stone-50 rounded-xl transition-colors group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="p-2 bg-stone-100 rounded-lg text-stone-900 group-hover:bg-orange-100 group-hover:text-orange-600 transition-colors">
+                        {item.icon}
+                      </div>
+                      <span className="font-bold text-stone-800 text-sm tracking-tight">
+                        {item.label}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {item.count && (
+                        <span className="text-xs font-black text-stone-300">
+                          {item.count}
+                        </span>
+                      )}
+                      <IoChevronForward className="text-stone-300" />
+                    </div>
+                  </button>
+                ))}
               </Card.Content>
+            </Card>
+
+            {/* Solis Loyalty Card */}
+            <Card className="border-none shadow-xl rounded-xl bg-orange-500 p-8 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
+              <div className="relative z-10 space-y-4">
+                <h3 className="text-xl font-serif italic">Solis Rewards</h3>
+                <div>
+                  <p className="text-4xl font-bold">450</p>
+                  <p className="text-orange-100 text-xs font-black uppercase tracking-widest">
+                    Available Points
+                  </p>
+                </div>
+                <Button className="w-full bg-stone-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest h-10">
+                  Redeem Points
+                </Button>
+              </div>
             </Card>
           </div>
 
-          {/* Right Content */}
-          <div className="lg:col-span-8 space-y-8">
-            <div className="grid grid-cols-3 gap-4">
-              {stats.map((item) => (
-                <Card
-                  key={item.label}
-                  className="border-none shadow-md bg-white rounded-3xl"
-                >
-                  <Card.Content className="flex flex-col items-center py-6">
-                    <div className="text-2xl text-orange-500 mb-2">
-                      {item.icon}
-                    </div>
-                    <span className="text-2xl font-bold text-stone-900">
-                      {item.value}
-                    </span>
-                    <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
-                      {item.label}
-                    </span>
-                  </Card.Content>
-                </Card>
-              ))}
-            </div>
-
-            <Card className="border-none shadow-xl bg-white rounded-3xl overflow-hidden">
-              <Card.Header className="px-8 pt-8 pb-0 flex flex-col items-start">
+          {/* Account Details */}
+          <div className="md:col-span-7">
+            <Card className="border border-stone-200 shadow-sm rounded-xl bg-white h-full">
+              <Card.Header className="px-8 pt-8 pb-4 border-b border-stone-100">
                 <Card.Title className="text-xl font-bold text-stone-900 uppercase tracking-tight">
-                  Account Overview
+                  Personal Information
                 </Card.Title>
               </Card.Header>
-              <Card.Content className="p-0">
-                <div className="p-8 space-y-6">
-                  <div className="flex justify-between items-center text-left">
-                    <div>
-                      <p className="text-stone-400 text-[10px] font-bold uppercase tracking-widest">
-                        Member Since
-                      </p>
-                      <p className="text-stone-800 font-medium">
-                        {user.joined}
-                      </p>
-                    </div>
-                    <Button
-                      variant="light"
-                      size="sm"
-                      className="font-bold text-orange-600"
-                    >
-                      Update
-                    </Button>
+              <Card.Content className="p-8 space-y-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div className="space-y-1">
+                    <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest">
+                      Email Address
+                    </p>
+                    <p className="text-stone-800 font-bold">{user?.email}</p>
                   </div>
-
-                  {/* Manual Divider to avoid export issues */}
-                  <div className="h-px bg-stone-100 w-full" />
-
-                  <div className="flex justify-between items-center text-left">
-                    <div>
-                      <p className="text-stone-400 text-[10px] font-bold uppercase tracking-widest">
-                        Primary Shipping
-                      </p>
-                      <p className="text-stone-800 font-medium truncate max-w-[180px] md:max-w-none">
-                        Uttara, Sector 7, Dhaka
-                      </p>
-                    </div>
-                    <Button
-                      variant="light"
-                      size="sm"
-                      className="font-bold text-orange-600"
-                    >
-                      Change
-                    </Button>
+                  <div className="space-y-1">
+                    <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest">
+                      Member Since
+                    </p>
+                    <p className="text-stone-800 font-bold">{user?.joined}</p>
+                  </div>
+                  <div className="space-y-1 sm:col-span-2">
+                    <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest">
+                      Shipping Address
+                    </p>
+                    <p className="text-stone-800 font-bold"></p>
                   </div>
                 </div>
 
-                <div className="bg-orange-500 p-8 text-white flex justify-between items-center">
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold italic tracking-tight">
-                      Solis Rewards
-                    </h3>
-                    <p className="text-orange-100 opacity-90 text-sm">
-                      You have 450 summer points!
-                    </p>
-                  </div>
-                  <Button className="bg-white text-orange-600 font-bold rounded-full px-8 shadow-lg transition-transform active:scale-95">
-                    Redeem
+                <div className="pt-4">
+                  <Button
+                    variant="bordered"
+                    className="border-stone-200 text-stone-900 font-bold rounded-xl px-6 hover:bg-stone-50"
+                  >
+                    Manage All Data
                   </Button>
                 </div>
               </Card.Content>

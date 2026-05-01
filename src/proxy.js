@@ -7,10 +7,19 @@ export async function proxy(request) {
     headers: await headers(),
   });
   const { pathname } = request.nextUrl;
-  if ((session && pathname === "/login") || pathname === "/register") {
+
+  const authRoutes = ["/login", "/register"];
+
+  if (session && authRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/my-profile", request.url));
   }
-  if (!session && pathname !== "/login") {
+
+  const isProfilePage = pathname === "/my-profile";
+
+  const isProductDetailPage =
+    pathname.startsWith("/products/") && pathname !== "/products";
+
+  if (!session && (isProfilePage || isProductDetailPage)) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

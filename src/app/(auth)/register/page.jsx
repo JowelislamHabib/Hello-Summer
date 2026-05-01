@@ -1,24 +1,32 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import {
-  IoMailOutline,
-  IoLockClosedOutline,
   IoPersonOutline,
-  IoImageOutline,
-  IoArrowForward,
+  IoMailOutline,
+  IoLinkOutline,
+  IoLockClosedOutline,
   IoEyeOutline,
   IoEyeOffOutline,
+  IoAlertCircleOutline,
 } from "react-icons/io5";
-import { HandStop } from "@gravity-ui/icons";
-import { Form, TextField, FieldError, toast } from "@heroui/react";
+import {
+  Button,
+  FieldError,
+  Form,
+  Input,
+  InputGroup,
+  TextField,
+  toast,
+} from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 
 const RegisterPage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
     const name = formData.get("name");
     const email = formData.get("email");
@@ -26,9 +34,9 @@ const RegisterPage = () => {
     const photo = formData.get("photo");
 
     const { data, error } = await authClient.signUp.email({
-      name: name,
-      email: email,
-      password: password,
+      name,
+      email,
+      password,
       image: photo,
       callbackURL: "/",
     });
@@ -40,22 +48,17 @@ const RegisterPage = () => {
           variant: "danger",
         },
         description:
-          "Sorry to toast you, but something went wrong during registration. Please try again.",
-        indicator: <HandStop />,
+          "Something went wrong during registration. Please try again.",
+        indicator: <IoAlertCircleOutline size={20} />,
       });
     }
-  };
 
-  const signIn = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-    });
+    console.log(data, error, "--- Sign Up Response ---");
   };
 
   return (
     <div className="min-h-[calc(100vh-80px)] bg-stone-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
-        {/* Header Section */}
         <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="h-0.5 w-8 bg-orange-500/30"></span>
@@ -72,17 +75,14 @@ const RegisterPage = () => {
           </p>
         </div>
 
-        {/* Main Registration Card */}
         <div className="bg-white p-8 md:p-10 rounded-xl border border-stone-200 shadow-xl shadow-stone-200/50">
           <Form className="space-y-5" onSubmit={onSubmit}>
-            {/* Full Name Field */}
             <TextField
               isRequired
               name="name"
-              type="text"
-              validate={(value) =>
-                value.trim().length < 3
-                  ? "Name must be at least 3 characters"
+              validate={(v) =>
+                v.trim().length < 3
+                  ? "Please enter a valid full name (at least 3 characters)"
                   : null
               }
               className="space-y-2"
@@ -90,27 +90,23 @@ const RegisterPage = () => {
               <label className="text-stone-900 text-xs font-black uppercase tracking-widest ml-1">
                 Full Name
               </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400 group-focus-within:text-orange-500 transition-colors">
-                  <IoPersonOutline size={20} />
-                </div>
-                <input
+              <div className="relative flex items-center">
+                <IoPersonOutline className="absolute left-4 text-stone-400 size-5 z-10" />
+                <Input
                   name="name"
                   placeholder="John Doe"
-                  className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                  className="w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                 />
               </div>
-              <FieldError className="text-red-500 text-[10px] font-bold uppercase tracking-tighter mt-1 ml-1" />
+              <FieldError className="text-red-500 text-[10px] font-bold uppercase ml-1" />
             </TextField>
 
-            {/* Avatar URL Field */}
             <TextField
               isRequired
               name="photo"
-              type="url"
-              validate={(value) =>
-                !value.startsWith("https://")
-                  ? "Must be a secure URL (https://)"
+              validate={(v) =>
+                !v.startsWith("https://")
+                  ? "Please enter a valid url (must start with https://)"
                   : null
               }
               className="space-y-2"
@@ -118,27 +114,23 @@ const RegisterPage = () => {
               <label className="text-stone-900 text-xs font-black uppercase tracking-widest ml-1">
                 Avatar URL
               </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400 group-focus-within:text-orange-500 transition-colors">
-                  <IoImageOutline size={20} />
-                </div>
-                <input
+              <div className="relative flex items-center">
+                <IoLinkOutline className="absolute left-4 text-stone-400 size-5 z-10" />
+                <Input
                   name="photo"
                   placeholder="https://example.com/avatar.jpg"
-                  className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                  className="w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                 />
               </div>
-              <FieldError className="text-red-500 text-[10px] font-bold uppercase tracking-tighter mt-1 ml-1" />
+              <FieldError className="text-red-500 text-[10px] font-bold uppercase ml-1" />
             </TextField>
 
-            {/* Email Field */}
             <TextField
               isRequired
               name="email"
-              type="email"
-              validate={(value) =>
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-                  ? "Invalid email address"
+              validate={(v) =>
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(v)
+                  ? "Please enter a valid email address"
                   : null
               }
               className="space-y-2"
@@ -146,69 +138,70 @@ const RegisterPage = () => {
               <label className="text-stone-900 text-xs font-black uppercase tracking-widest ml-1">
                 Email Address
               </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400 group-focus-within:text-orange-500 transition-colors">
-                  <IoMailOutline size={20} />
-                </div>
-                <input
+              <div className="relative flex items-center">
+                <IoMailOutline className="absolute left-4 text-stone-400 size-5 z-10" />
+                <Input
                   name="email"
                   placeholder="name@example.com"
-                  className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                  className="w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                 />
               </div>
-              <FieldError className="text-red-500 text-[10px] font-bold uppercase tracking-tighter mt-1 ml-1" />
+              <FieldError className="text-red-500 text-[10px] font-bold uppercase ml-1" />
             </TextField>
 
-            {/* Password Field */}
             <TextField
               isRequired
               name="password"
-              className="space-y-2"
-              validate={(value) =>
-                value.length < 8 ? "Minimum 8 characters required" : null
+              validate={(v) =>
+                v.length < 8
+                  ? "Please enter a stronger password (at least 8 characters)"
+                  : null
               }
+              className="space-y-2"
             >
               <label className="text-stone-900 text-xs font-black uppercase tracking-widest ml-1">
                 Password
               </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400 group-focus-within:text-orange-500 transition-colors">
+              <InputGroup className="w-full h-14.5 bg-stone-50 border border-stone-200 rounded-xl focus-within:ring-2 focus-within:ring-orange-500/20 focus-within:border-orange-500 transition-all overflow-hidden flex items-center">
+                <div className="pl-4 text-stone-400">
                   <IoLockClosedOutline size={20} />
                 </div>
-                <input
+                <InputGroup.Input
                   name="password"
                   type={isVisible ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="w-full pl-12 pr-12 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                  placeholder="enter a strong password"
+                  className="flex-1 px-3 bg-transparent border-none focus:ring-0 text-stone-900"
                 />
-                <button
-                  type="button"
-                  onClick={() => setIsVisible(!isVisible)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-stone-400 hover:text-orange-500 transition-colors"
-                >
-                  {isVisible ? (
-                    <IoEyeOffOutline size={20} />
-                  ) : (
-                    <IoEyeOutline size={20} />
-                  )}
-                </button>
-              </div>
-              <FieldError className="text-red-500 text-[10px] font-bold uppercase tracking-tighter mt-1 ml-1" />
+                <InputGroup.Suffix className="pr-2">
+                  <Button
+                    isIconOnly
+                    size="sm"
+                    variant="light"
+                    onPress={() => setIsVisible(!isVisible)}
+                    className="text-stone-400 hover:text-stone-600"
+                  >
+                    {isVisible ? (
+                      <IoEyeOffOutline size={20} />
+                    ) : (
+                      <IoEyeOutline size={20} />
+                    )}
+                  </Button>
+                </InputGroup.Suffix>
+              </InputGroup>
+              <FieldError className="text-red-500 text-[10px] font-bold uppercase ml-1" />
             </TextField>
 
             <button
               type="submit"
-              className="w-full py-5 bg-stone-900 text-stone-50 rounded-xl font-bold text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-orange-500 transition-all active:scale-[0.98] shadow-xl shadow-stone-200 mt-4"
+              className="w-full py-5 bg-stone-900 text-white rounded-xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-orange-500 transition-all active:scale-[0.98] shadow-xl"
             >
               Join the Store
-              <IoArrowForward size={18} />
             </button>
           </Form>
 
-          {/* Social Divider */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-stone-100"></div>
+              <div className="w-full border-t border-stone-100" />
             </div>
             <div className="relative flex justify-center text-[10px] uppercase tracking-[0.3em] font-black">
               <span className="bg-white px-4 text-stone-300">or</span>
@@ -217,7 +210,7 @@ const RegisterPage = () => {
 
           <button
             onClick={() => signIn()}
-            className="w-full py-4 bg-white text-stone-700 border border-stone-200 rounded-xl font-bold text-sm flex items-center justify-center gap-3 hover:bg-stone-50 hover:border-stone-300 transition-all active:scale-[0.98] shadow-sm"
+            className="w-full py-4 bg-white text-stone-700 border border-stone-200 rounded-xl font-bold text-sm flex items-center justify-center gap-3 hover:bg-stone-50 hover:border-stone-300 transition-all active:scale-[0.98] shadow-sm mt-4"
           >
             <svg
               width="20"
@@ -244,25 +237,12 @@ const RegisterPage = () => {
             </svg>
             Continue with Google
           </button>
-
-          <div className="mt-8 text-center">
-            <p className="text-stone-900/50 text-sm font-medium">
-              Already have an account?{" "}
-              <Link
-                href="/login"
-                className="text-stone-900 font-black hover:text-orange-500 transition-colors underline decoration-orange-500/30 underline-offset-4"
-              >
-                Sign in instead
-              </Link>
-            </p>
-          </div>
         </div>
 
-        {/* Back to Home */}
         <div className="mt-8 text-center">
           <Link
             href="/"
-            className="text-stone-900/40 text-xs font-bold uppercase tracking-[0.2em] hover:text-stone-900 transition-colors"
+            className="text-stone-900/40 text-xs font-bold uppercase tracking-[0.2em]"
           >
             ← Back to Store
           </Link>

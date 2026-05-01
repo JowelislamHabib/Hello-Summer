@@ -5,8 +5,18 @@ import {
   IoMailOutline,
   IoLockClosedOutline,
   IoArrowForward,
+  IoAlertCircleOutline,
 } from "react-icons/io5";
 import { authClient } from "@/lib/auth-client";
+import {
+  Button,
+  FieldError,
+  Form,
+  Input,
+  TextField,
+  toast,
+} from "@heroui/react";
+
 const LoginPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +29,21 @@ const LoginPage = () => {
       password: password,
       callbackURL: "/",
     });
+
+    if (error) {
+      toast.danger(error.message, {
+        actionProps: {
+          children: "Remove",
+          variant: "danger",
+        },
+        description: "Please check your credentials and try again.",
+        indicator: <IoAlertCircleOutline size={20} />,
+      });
+    }
   };
 
   const signIn = async () => {
-    const data = await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
     });
   };
@@ -47,25 +68,43 @@ const LoginPage = () => {
         </div>
 
         <div className="bg-white p-8 md:p-10 rounded-xl border border-stone-200 shadow-xl shadow-stone-200/50">
-          <form className="space-y-6" onSubmit={onSubmit}>
-            <div className="space-y-2">
+          <Form
+            className="space-y-6"
+            onSubmit={onSubmit}
+            validationBehavior="native"
+          >
+            <TextField
+              isRequired
+              name="email"
+              validate={(value) =>
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+                  ? "Invalid email address"
+                  : null
+              }
+              className="space-y-2"
+            >
               <label className="text-stone-900 text-xs font-black uppercase tracking-widest ml-1">
                 Email Address
               </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400 group-focus-within:text-orange-500 transition-colors">
-                  <IoMailOutline size={20} />
-                </div>
-                <input
-                  type="email"
+              <div className="relative flex items-center">
+                <IoMailOutline className="absolute left-4 text-stone-400 size-5 z-10" />
+                <Input
                   name="email"
                   placeholder="name@example.com"
-                  className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
-                  required
+                  className="w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                 />
               </div>
-            </div>
-            <div className="space-y-2">
+              <FieldError className="text-red-500 text-[10px] font-bold uppercase ml-1" />
+            </TextField>
+
+            <TextField
+              isRequired
+              name="password"
+              validate={(value) =>
+                value.length < 8 ? "Minimum 8 characters required" : null
+              }
+              className="space-y-2"
+            >
               <div className="flex justify-between items-center ml-1">
                 <label className="text-stone-900 text-xs font-black uppercase tracking-widest">
                   Password
@@ -77,27 +116,27 @@ const LoginPage = () => {
                   Forgot?
                 </Link>
               </div>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400 group-focus-within:text-orange-500 transition-colors">
-                  <IoLockClosedOutline size={20} />
-                </div>
-                <input
+              <div className="relative flex items-center">
+                <IoLockClosedOutline className="absolute left-4 text-stone-400 size-5 z-10" />
+                <Input
                   type="password"
                   name="password"
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
-                  required
+                  className="w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                 />
               </div>
-            </div>
+              <FieldError className="text-red-500 text-[10px] font-bold uppercase ml-1" />
+            </TextField>
+
             <button
               type="submit"
-              className="w-full py-5 bg-stone-900 text-stone-50 rounded-xl font-bold text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-orange-500 transition-all active:scale-[0.98] shadow-xl shadow-stone-200 mt-4"
+              className="w-full py-5 bg-stone-900 text-stone-50 rounded-xl font-bold text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-orange-500 transition-all active:scale-[0.98] shadow-xl shadow-stone-200 mt-2"
             >
               Secure Login
               <IoArrowForward size={18} />
             </button>
-          </form>
+          </Form>
+
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-stone-100"></div>
@@ -106,16 +145,12 @@ const LoginPage = () => {
               <span className="bg-white px-4 text-stone-300">or</span>
             </div>
           </div>
+
           <button
             onClick={() => signIn()}
-            className="w-full py-4 bg-white text-stone-700 border border-stone-200 rounded-xl font-bold text-sm flex items-center justify-center gap-3 hover:bg-stone-50 hover:border-stone-300 transition-all active:scale-[0.98] shadow-sm mt-4"
+            className="w-full py-4 bg-white text-stone-700 border border-stone-200 rounded-xl font-bold text-sm flex items-center justify-center gap-3 hover:bg-stone-50 transition-all active:scale-[0.98] shadow-sm"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="20" height="20" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 fill="#4285F4"
@@ -149,11 +184,10 @@ const LoginPage = () => {
           </div>
         </div>
 
-        {/* Back to Home */}
         <div className="mt-8 text-center">
           <Link
             href="/"
-            className="text-stone-900/40 text-xs font-bold uppercase tracking-[0.2em] hover:text-stone-900 transition-colors"
+            className="text-stone-900/40 text-xs font-bold uppercase tracking-[0.2em] hover:text-stone-900"
           >
             ← Back to Store
           </Link>
