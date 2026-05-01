@@ -13,6 +13,11 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { UserUpdate } from "@/components/UserUpdate";
 
+export const metadata = {
+  title: "My Profile - Solis",
+  description: "Manage your Solis profile and personal information.",
+};
+
 const MyProfile = () => {
   const { data, isPending } = authClient.useSession();
   const user = data?.user;
