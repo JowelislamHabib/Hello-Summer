@@ -10,7 +10,6 @@ import {
   InputGroup,
   Label,
   TextField,
-  Toast,
   toast,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";

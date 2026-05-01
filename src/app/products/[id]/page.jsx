@@ -1,6 +1,5 @@
 import { getProducts } from "@/lib/data";
 import Image from "next/image";
-import React from "react";
 import {
   IoStar,
   IoCartOutline,
@@ -17,9 +16,10 @@ const ProductDetailsPage = async ({ params }) => {
 
   const products = await getProducts();
 
-const product = products.find((item) => item.id === parseInt(prodductId));
+  const product = products.find((item) => item.id === parseInt(prodductId));
 
-  const { name, brand, price, rating, image, stock, category, description } = product;
+  const { name, brand, price, rating, image, stock, category, description } =
+    product;
   console.log(name, "Single Product");
 
   const trustFeatures = [

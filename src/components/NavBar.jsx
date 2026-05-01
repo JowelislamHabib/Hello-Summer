@@ -9,12 +9,11 @@ import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
 
 const NavBar = () => {
-  const pathname = usePathname();
-
   const userData = authClient.useSession();
   const user = userData.data?.user;
+  // console.log(user);
 
-  console.log(user);
+  const pathname = usePathname();
 
   const navLinks = [
     { name: "Home", href: "/" },
