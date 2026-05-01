@@ -7,11 +7,13 @@ import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { ArrowRightFromSquare, Gear, Person } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
   const userData = authClient.useSession();
   const user = userData.data?.user;
   // console.log(user);
+  const router = useRouter();
 
   const pathname = usePathname();
 
@@ -116,7 +118,11 @@ const NavBar = () => {
 
                     <Dropdown.Item id="logout" variant="danger">
                       <div
-                        onClick={async () => await authClient.signOut()}
+                        onClick={async () => {
+                          await authClient.signOut();
+                          router.push("/login");
+                          router.refresh();
+                        }}
                         className="flex w-full items-center justify-between gap-2"
                       >
                         <Label>Log Out</Label>

@@ -163,6 +163,20 @@ const MyProfile = () => {
                       412 New York, Beach City, USA 90210
                     </p>
                   </div>
+                  <div className="space-y-1">
+                    <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest">
+                      Last Profile Update
+                    </p>
+                    <p className="text-stone-800 font-bold">
+                      {user?.updatedAt
+                        ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })
+                        : "N/A"}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="pt-4">
