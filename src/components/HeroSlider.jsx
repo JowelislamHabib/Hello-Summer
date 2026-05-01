@@ -13,7 +13,6 @@ export default function HeroSlider() {
     "/banner-images/1.png",
     "/banner-images/2.png",
     "/banner-images/3.png",
-    "/banner-images/4.png",
     "/banner-images/5.png",
   ];
 

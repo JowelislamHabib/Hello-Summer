@@ -49,7 +49,7 @@ const ProductDetailsPage = async ({ params }) => {
     <div className="min-h-screen bg-stone-50 py-12 md:py-20 px-4">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div className="sticky top-24">
+          <div className="top-24">
             <div className="relative overflow-hidden rounded-xl bg-white border border-stone-200 shadow-sm">
               <Image
                 src={image}
