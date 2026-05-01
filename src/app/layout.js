@@ -19,7 +19,7 @@ export const metadata = {
   title: "Solis Summer",
   description: "Premium Men’s Seasonal Essentials",
   icons: {
-    icon: "/public/favicon.png",
+    icon: "/favicon.png",
   },
 };
 
