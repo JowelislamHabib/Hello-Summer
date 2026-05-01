@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import logo from "../../public/solis-logo.png";
-import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
+import { IoCartOutline, IoLogIn, IoPersonAdd, IoMenu, IoClose } from "react-icons/io5";
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { ArrowRightFromSquare, Gear, Person } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
@@ -13,12 +13,11 @@ import { UserUpdate } from "./UserUpdate";
 
 const NavBar = () => {
   const [isUserUpdateOpen, setIsUserUpdateOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const userData = authClient.useSession();
   const user = userData.data?.user;
-  // console.log(user);
   const router = useRouter();
-
   const pathname = usePathname();
 
   const navLinks = [
@@ -144,24 +143,78 @@ const NavBar = () => {
             )}
 
             {!user && (
-              <div className="flex gap-4 justify-center items-center">
+              <div className="hidden md:flex gap-4 justify-center items-center">
                 <Link
                   href={"/login"}
-                  className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.2)] transition-all active:scale-95 hidden md:flex"
+                  className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.2)] transition-all active:scale-95"
                 >
                   <IoLogIn size={24} />
                   Login
                 </Link>
                 <Link
                   href={"/register"}
-                  className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.3)] transition-all active:scale-95 hidden md:flex"
+                  className="flex justify-center items-center gap-2 px-8 py-2.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold hover:shadow-[0_8px_24px_rgba(245,158,11,0.3)] transition-all active:scale-95"
                 >
                   <IoPersonAdd />
                   Register
                 </Link>
               </div>
             )}
+
+            {/* Mobile Menu Toggle Button */}
+            <button
+              className="md:hidden flex items-center justify-center text-stone-900 transition-transform active:scale-95"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <IoClose size={28} /> : <IoMenu size={28} />}
+            </button>
           </div>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        <div 
+          className={`md:hidden absolute top-20 left-0 w-full bg-orange-50 border-b border-stone-200 transition-all duration-300 overflow-hidden shadow-lg ${
+            isMobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <nav className="flex flex-col items-center gap-6 py-8">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-xl font-bold uppercase transition-all duration-300 ${
+                    isActive ? "text-orange-600" : "text-stone-900 hover:text-orange-500"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            
+            {!user && (
+              <div className="flex flex-col gap-4 mt-2 w-full px-8 sm:px-16">
+                <Link
+                  href={"/login"}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex justify-center items-center gap-2 w-full py-3.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold active:scale-95 transition-all"
+                >
+                  <IoLogIn size={24} />
+                  Login
+                </Link>
+                <Link
+                  href={"/register"}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex justify-center items-center gap-2 w-full py-3.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold active:scale-95 transition-all"
+                >
+                  <IoPersonAdd />
+                  Register
+                </Link>
+              </div>
+            )}
+          </nav>
         </div>
       </div>
       <UserUpdate

@@ -10,11 +10,6 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { FieldError, Form, Input, TextField, toast } from "@heroui/react";
 
-export const metadata = {
-  title: "Login - Solis",
-  description: "Log in to your Solis account to access premium features.",
-};
-
 const LoginPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();

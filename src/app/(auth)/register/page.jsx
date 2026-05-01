@@ -22,11 +22,6 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export const metadata = {
-  title: "Create Account - Solis",
-  description: "Join the Solis community for a premium experience.",
-};
-
 const RegisterPage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
