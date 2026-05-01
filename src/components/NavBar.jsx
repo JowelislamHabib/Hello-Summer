@@ -171,51 +171,48 @@ const NavBar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
-        <div 
-          className={`md:hidden absolute top-20 left-0 w-full bg-orange-50 border-b border-stone-200 transition-all duration-300 overflow-hidden shadow-lg ${
-            isMobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <nav className="flex flex-col items-center gap-6 py-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-xl font-bold uppercase transition-all duration-300 ${
-                    isActive ? "text-orange-600" : "text-stone-900 hover:text-orange-500"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-            
-            {!user && (
-              <div className="flex flex-col gap-4 mt-2 w-full px-8 sm:px-16">
-                <Link
-                  href={"/login"}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex justify-center items-center gap-2 w-full py-3.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold active:scale-95 transition-all"
-                >
-                  <IoLogIn size={24} />
-                  Login
-                </Link>
-                <Link
-                  href={"/register"}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex justify-center items-center gap-2 w-full py-3.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold active:scale-95 transition-all"
-                >
-                  <IoPersonAdd />
-                  Register
-                </Link>
-              </div>
-            )}
-          </nav>
-        </div>
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-20 left-0 w-full bg-orange-50 border-b border-stone-200 shadow-lg z-50">
+            <nav className="flex flex-col items-center gap-6 py-8">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-xl font-bold uppercase transition-all duration-300 ${
+                      isActive ? "text-orange-600" : "text-stone-900 hover:text-orange-500"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+              
+              {!user && (
+                <div className="flex flex-col gap-4 mt-2 w-full px-8 sm:px-16">
+                  <Link
+                    href={"/login"}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex justify-center items-center gap-2 w-full py-3.5 rounded-full border-2 border-orange-500 text-stone-900 font-bold active:scale-95 transition-all"
+                  >
+                    <IoLogIn size={24} />
+                    Login
+                  </Link>
+                  <Link
+                    href={"/register"}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex justify-center items-center gap-2 w-full py-3.5 rounded-full border-2 border-orange-500 bg-orange-500 text-stone-50 font-bold active:scale-95 transition-all"
+                  >
+                    <IoPersonAdd />
+                    Register
+                  </Link>
+                </div>
+              )}
+            </nav>
+          </div>
+        )}
       </div>
       <UserUpdate
         isOpen={isUserUpdateOpen}
