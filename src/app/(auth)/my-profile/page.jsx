@@ -17,6 +17,7 @@ const MyProfile = () => {
   const { data, isPending } = authClient.useSession();
   const user = data?.user;
   console.log(user);
+
   if (isPending) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -41,10 +42,7 @@ const MyProfile = () => {
         {/* Top Profile Bar */}
         <Card className="border border-stone-200 shadow-sm rounded-xl overflow-hidden bg-white">
           <Card.Content className="p-6 md:p-10 flex flex-col md:flex-row items-center gap-8">
-            <Avatar
-              src={user?.image}
-              className="w-32 h-32 rounded-xl ring-4 ring-stone-50"
-            />
+            <Avatar src={user?.image} className="w-32 h-32 " />
             <div className="flex-1 text-center md:text-left space-y-2">
               <div className="flex flex-col md:flex-row md:items-center gap-3">
                 <h1 className="text-4xl font-serif text-stone-900 tracking-tight">
@@ -54,12 +52,11 @@ const MyProfile = () => {
                   variant="flat"
                   className="bg-orange-500 text-white font-black uppercase tracking-[0.2em] text-[9px] h-5 rounded-md self-center md:self-auto"
                 >
-                  {user?.status}
+                  Verified Buyer
                 </Chip>
               </div>
               <p className="text-stone-500 font-medium flex items-center justify-center md:justify-start gap-2">
-                <IoLocationOutline className="text-orange-500" />{" "}
-                {user?.location}
+                <IoLocationOutline className="text-orange-500" /> New York, USA
               </p>
             </div>
             <Button
@@ -145,20 +142,30 @@ const MyProfile = () => {
                     <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest">
                       Member Since
                     </p>
-                    <p className="text-stone-800 font-bold">{user?.joined}</p>
+                    <p className="text-stone-800 font-bold">
+                      {user?.createdAt
+                        ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })
+                        : "N/A"}
+                    </p>
                   </div>
                   <div className="space-y-1 sm:col-span-2">
                     <p className="text-stone-400 text-[10px] font-black uppercase tracking-widest">
                       Shipping Address
                     </p>
-                    <p className="text-stone-800 font-bold"></p>
+                    <p className="text-stone-800 font-bold">
+                      412 New York, Beach City, USA 90210
+                    </p>
                   </div>
                 </div>
 
                 <div className="pt-4">
                   <Button
                     variant="bordered"
-                    className="border-stone-200 text-stone-900 font-bold rounded-xl px-6 hover:bg-stone-50"
+                    className="border-stone-200 text-stone-900 font-bold rounded-xl px-6 bg-stone-200 hover:bg-stone-300"
                   >
                     Manage All Data
                   </Button>
