@@ -9,6 +9,24 @@ import {
   IoLeafOutline,
 } from "react-icons/io5";
 
+export async function generateMetadata({ params }) {
+  const singleProduct = await params;
+  const prodductId = singleProduct.id;
+  const products = await getProducts();
+  const product = products.find((item) => item.id === parseInt(prodductId));
+
+  if (!product) {
+    return {
+      title: "Product Not Found - Solis",
+    };
+  }
+
+  return {
+    title: `${product.name} - Solis`,
+    description: product.description || `Buy ${product.name} at Solis Summer.`,
+  };
+}
+
 const ProductDetailsPage = async ({ params }) => {
   const singleProduct = await params;
   const prodductId = singleProduct.id;

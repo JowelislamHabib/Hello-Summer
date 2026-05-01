@@ -5,6 +5,11 @@ import { IoArrowForwardOutline } from "react-icons/io5";
 import ProductCard from "@/components/ProductCard";
 import "animate.css";
 
+export const metadata = {
+  title: "All Products - Solis",
+  description: "Explore our full range of summer essentials.",
+};
+
 const ProductsPage = async () => {
   const products = await getProducts();
   const { name, brand, price, rating, image, stock, category } = products;

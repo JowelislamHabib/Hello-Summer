@@ -16,8 +16,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Solis Summer",
-  description: "Premium Men’s Seasonal Essentials",
+  title: "Solis - Premium Men's Essentials",
+  description:
+    "Discover Solis, where luxury meets leisure. Explore our curated collection of premium men’s seasonal essentials, designed for the modern gentleman who values both style and comfort. Crafted with exceptional materials and timeless design, Solis redefines seasonal wear for the discerning individual.",
   icons: {
     icon: "/favicon.png",
   },
