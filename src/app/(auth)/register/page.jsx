@@ -20,10 +20,12 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +40,6 @@ const RegisterPage = () => {
       email,
       password,
       image: photo,
-      callbackURL: "/",
     });
 
     if (error) {
@@ -51,6 +52,14 @@ const RegisterPage = () => {
           "Something went wrong during registration. Please try again.",
         indicator: <IoAlertCircleOutline size={20} />,
       });
+    }
+    const logOut = async () => {
+      await authClient.signOut();
+      router.push("/login");
+    };
+    if (!error) {
+      toast.success("Registration successful! Please login your account now.");
+      logOut();
     }
 
     console.log(data, error, "--- Sign Up Response ---");
