@@ -2,14 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import logo from "../../public/solis-logo.png";
 import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { ArrowRightFromSquare, Gear, Person } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { UserUpdate } from "./UserUpdate";
 
 const NavBar = () => {
+  const [isUserUpdateOpen, setIsUserUpdateOpen] = useState(false);
+
   const userData = authClient.useSession();
   const user = userData.data?.user;
   // console.log(user);
@@ -20,7 +24,6 @@ const NavBar = () => {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/products" },
-    { name: "Profile", href: "/my-profile" },
   ];
 
   return (
@@ -109,9 +112,15 @@ const NavBar = () => {
                       </Link>
                     </Dropdown.Item>
 
-                    <Dropdown.Item id="settings">
-                      <div className="flex w-full items-center justify-between gap-2">
-                        <Label>Settings</Label>
+                    <Dropdown.Item id="settings" textValue="Settings" onAction={() => setIsUserUpdateOpen(true)}>
+                      <div 
+                        className="flex w-full items-center justify-between gap-2 cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setIsUserUpdateOpen(true);
+                        }}
+                      >
+                        <Label className="cursor-pointer">Settings</Label>
                         <Gear className="size-3.5 text-muted" />
                       </div>
                     </Dropdown.Item>
@@ -155,6 +164,11 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+      <UserUpdate
+        isOpen={isUserUpdateOpen}
+        onOpenChange={setIsUserUpdateOpen}
+        customTrigger={<button className="hidden">hidden</button>}
+      />
     </div>
   );
 };

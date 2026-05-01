@@ -3,20 +3,20 @@
 import React from "react";
 import { Avatar, Button, Card, Chip } from "@heroui/react";
 import {
-  IoSettingsOutline,
-  IoMailOutline,
   IoLocationOutline,
   IoCubeOutline,
   IoHeartOutline,
   IoShieldCheckmarkOutline,
   IoChevronForward,
+  IoSettingsOutline,
 } from "react-icons/io5";
 import { authClient } from "@/lib/auth-client";
+import { UserUpdate } from "@/components/UserUpdate";
 
 const MyProfile = () => {
   const { data, isPending } = authClient.useSession();
   const user = data?.user;
-  console.log(user);
+  // console.log(user);
 
   if (isPending) {
     return (
@@ -39,11 +39,14 @@ const MyProfile = () => {
   return (
     <div className="min-h-screen bg-stone-50 py-12 px-4 font-sans">
       <div className="container mx-auto space-y-6">
-        {/* Top Profile Bar */}
         <Card className="border border-stone-200 shadow-sm rounded-xl overflow-hidden bg-white">
           <Card.Content className="p-6 md:p-10 flex flex-col md:flex-row items-center gap-8">
             <Avatar className="w-32 h-32">
-              <Avatar.Image alt={user?.name} src={user?.image} />
+              <Avatar.Image
+                referrerPolicy="no-referrer"
+                alt={user?.name}
+                src={user?.image}
+              />
               <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
             </Avatar>
             <div className="flex-1 text-center md:text-left space-y-2">
@@ -62,17 +65,11 @@ const MyProfile = () => {
                 <IoLocationOutline className="text-orange-500" /> New York, USA
               </p>
             </div>
-            <Button
-              className="bg-stone-900 text-stone-50 font-bold px-8 h-12 rounded-xl hover:bg-orange-500 transition-all active:scale-95 text-xs uppercase tracking-widest"
-              startContent={<IoSettingsOutline size={18} />}
-            >
-              Account Settings
-            </Button>
+            <UserUpdate />
           </Card.Content>
         </Card>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Navigation & Stats */}
           <div className="md:col-span-5 space-y-6">
             <Card className="border border-stone-200 shadow-sm rounded-xl bg-white">
               <Card.Header className="px-6 pt-6 pb-2">
@@ -107,7 +104,6 @@ const MyProfile = () => {
               </Card.Content>
             </Card>
 
-            {/* Solis Loyalty Card */}
             <Card className="border-none shadow-xl rounded-xl bg-orange-500 p-8 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
               <div className="relative z-10 space-y-4">
@@ -125,7 +121,6 @@ const MyProfile = () => {
             </Card>
           </div>
 
-          {/* Account Details */}
           <div className="md:col-span-7">
             <Card className="border border-stone-200 shadow-sm rounded-xl bg-white h-full">
               <Card.Header className="px-8 pt-8 pb-4 border-b border-stone-100">
@@ -169,7 +164,7 @@ const MyProfile = () => {
                     </p>
                     <p className="text-stone-800 font-bold">
                       {user?.updatedAt
-                        ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                        ? new Date(user.updatedAt).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",
