@@ -42,7 +42,10 @@ const MyProfile = () => {
         {/* Top Profile Bar */}
         <Card className="border border-stone-200 shadow-sm rounded-xl overflow-hidden bg-white">
           <Card.Content className="p-6 md:p-10 flex flex-col md:flex-row items-center gap-8">
-            <Avatar src={user?.image} className="w-32 h-32 " />
+            <Avatar className="w-32 h-32">
+              <Avatar.Image alt={user?.name} src={user?.image} />
+              <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+            </Avatar>
             <div className="flex-1 text-center md:text-left space-y-2">
               <div className="flex flex-col md:flex-row md:items-center gap-3">
                 <h1 className="text-4xl font-serif text-stone-900 tracking-tight">

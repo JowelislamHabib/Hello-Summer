@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import logo from "../../public/solis-logo.png";
 import { IoCartOutline, IoLogIn, IoPersonAdd } from "react-icons/io5";
 import { Avatar, Dropdown, Label } from "@heroui/react";
-import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
+import { ArrowRightFromSquare, Gear, Person } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
 
 const NavBar = () => {
@@ -72,12 +72,7 @@ const NavBar = () => {
                     className="border-2 border-orange-500 rounded-full object-cover cursor-pointer"
                   >
                     <Avatar.Image alt={user?.name} src={user?.image} />
-                    <Avatar.Fallback>
-                      {user?.name
-                        ?.split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </Avatar.Fallback>
+                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
                   </Avatar>
                 </Dropdown.Trigger>
 
@@ -87,10 +82,7 @@ const NavBar = () => {
                       <Avatar size="md">
                         <Avatar.Image alt={user?.name} src={user?.image} />
                         <Avatar.Fallback>
-                          {user?.name
-                            ?.split(" ")
-                            .map((n) => n[0])
-                            .join("")}
+                          {user?.name.charAt(0)}
                         </Avatar.Fallback>
                       </Avatar>
                       <div className="flex flex-col gap-0">
@@ -106,7 +98,13 @@ const NavBar = () => {
 
                   <Dropdown.Menu>
                     <Dropdown.Item id="profile">
-                      <Label>Profile</Label>
+                      <Link
+                        href={"/my-profile"}
+                        className="flex w-full items-center justify-between gap-2"
+                      >
+                        <Label>My Profile</Label>
+                        <Person className="size-3.5 text-muted" />
+                      </Link>
                     </Dropdown.Item>
 
                     <Dropdown.Item id="settings">
