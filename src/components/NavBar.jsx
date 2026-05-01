@@ -4,7 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import logo from "../../public/solis-logo.png";
-import { IoCartOutline, IoLogIn, IoPersonAdd, IoMenu, IoClose } from "react-icons/io5";
+import {
+  IoCartOutline,
+  IoLogIn,
+  IoPersonAdd,
+  IoMenu,
+  IoClose,
+} from "react-icons/io5";
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { ArrowRightFromSquare, Gear, Person } from "@gravity-ui/icons";
 import { authClient } from "@/lib/auth-client";
@@ -111,8 +117,12 @@ const NavBar = () => {
                       </Link>
                     </Dropdown.Item>
 
-                    <Dropdown.Item id="settings" textValue="Settings" onAction={() => setIsUserUpdateOpen(true)}>
-                      <div 
+                    <Dropdown.Item
+                      id="settings"
+                      textValue="Settings"
+                      onAction={() => setIsUserUpdateOpen(true)}
+                    >
+                      <div
                         className="flex w-full items-center justify-between gap-2 cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
@@ -161,7 +171,6 @@ const NavBar = () => {
               </div>
             )}
 
-            {/* Mobile Menu Toggle Button */}
             <button
               className="md:hidden flex items-center justify-center text-stone-900 transition-transform active:scale-95"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -182,14 +191,16 @@ const NavBar = () => {
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`text-xl font-bold uppercase transition-all duration-300 ${
-                      isActive ? "text-orange-600" : "text-stone-900 hover:text-orange-500"
+                      isActive
+                        ? "text-orange-600"
+                        : "text-stone-900 hover:text-orange-500"
                     }`}
                   >
                     {link.name}
                   </Link>
                 );
               })}
-              
+
               {!user && (
                 <div className="flex flex-col gap-4 mt-2 w-full px-8 sm:px-16">
                   <Link
