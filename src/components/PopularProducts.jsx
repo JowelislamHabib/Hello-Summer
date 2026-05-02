@@ -1,6 +1,6 @@
 import { getProducts } from "@/lib/data";
 import React from "react";
-import { IoStar, IoArrowForward, IoFlameSharp } from "react-icons/io5";
+import { IoFlameSharp } from "react-icons/io5";
 import ProductCard from "./ProductCard";
 import "animate.css";
 
