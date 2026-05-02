@@ -1,3 +1,4 @@
+import AddToCartBtn from "@/components/AddToCartBtn";
 import { getProducts } from "@/lib/data";
 import Image from "next/image";
 import {
@@ -120,10 +121,7 @@ const ProductDetailsPage = async ({ params }) => {
                 {description}
               </p>
 
-              <button className="w-full py-5 bg-stone-900 text-stone-50 rounded-xl font-bold text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-orange-500 transition-all active:scale-[0.98] shadow-xl shadow-stone-200 cursor-pointer">
-                <IoCartOutline size={20} />
-                Add to Cart
-              </button>
+              <AddToCartBtn />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
